@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">wedialog</string>
+    <string name="we_str_loading">数据加载中</string>
+</resources>

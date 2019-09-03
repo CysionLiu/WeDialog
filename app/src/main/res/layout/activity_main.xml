@@ -7,12 +7,106 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/vTvLoadingTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="20dp"
+        android:text="加载框"
+        android:textSize="@dimen/title_size"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/vTvShowloading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="显示"
+        android:textColor="@color/blue_text"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/vTvCloseloading"
+        app:layout_constraintTop_toBottomOf="@id/vTvLoadingTitle" />
+
+
+    <Button
+        android:id="@+id/vTvCloseloading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="随机展示"
+        android:textColor="@color/blue_text"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintLeft_toRightOf="@id/vTvShowloading"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vTvLoadingTitle" />
+
+    <View
+        android:id="@+id/vLoadingDiv"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="#ff000000"
+        app:layout_constraintTop_toBottomOf="@id/vTvCloseloading" />
+
+    <TextView
+        android:id="@+id/vTvCustomTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="自定义"
+        android:textSize="@dimen/title_size"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vLoadingDiv" />
+
+
+    <Button
+        android:id="@+id/vTvShowCustom1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="显示1"
+        android:textColor="@color/blue_text"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/vTvShowCustom2"
+        app:layout_constraintTop_toBottomOf="@id/vTvCustomTitle" />
+
+
+    <Button
+        android:id="@+id/vTvShowCustom2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="显示2"
+        android:textColor="@color/blue_text"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintLeft_toRightOf="@id/vTvShowCustom1"
+        app:layout_constraintRight_toLeftOf="@id/vTvShowCustom3"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vTvCustomTitle" />
+
+    <Button
+        android:id="@+id/vTvShowCustom3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="显示3"
+        android:textColor="@color/blue_text"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintLeft_toRightOf="@id/vTvShowCustom2"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vTvCustomTitle" />
+
+    <View
+        android:id="@+id/vLoadingDiv2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="#ff000000"
+        app:layout_constraintTop_toBottomOf="@id/vTvShowCustom3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

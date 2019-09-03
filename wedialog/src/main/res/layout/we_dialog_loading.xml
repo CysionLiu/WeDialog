@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fl_pop_blank"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:paddingBottom="10dp">
+
+    <RelativeLayout
+        android:id="@+id/ll_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/we_shape_round_black"
+        android:minWidth="80dp"
+        android:minHeight="80dp"
+        android:padding="10dp">
+
+        <ProgressBar
+            android:id="@+id/we_loading_bar"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:indeterminateTint="@color/we_loading_white"
+            tools:ignore="UnusedAttribute" />
+
+        <TextView
+            android:id="@+id/we_tv_loading_msg"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/we_loading_bar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:lines="1"
+            android:text="@string/we_str_loading"
+            android:textColor="@color/we_loading_white"
+            android:textSize="12dp"
+            android:visibility="visible" />
+
+
+    </RelativeLayout>
+</FrameLayout>
