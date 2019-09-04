@@ -16,6 +16,8 @@ class WeDialog {
     companion object {
         private var loadingDialog: LoadingDialog? = null
 
+
+
         fun loading(activity: FragmentActivity) {
             //在加载中，则不操作
             loadingDialog?.run {

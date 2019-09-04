@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="#ffffffff">
+
+    <ImageView
+        android:id="@+id/vIvCus2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:src="@mipmap/ic_launcher_round"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/vTvTipName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:text="用户名："
+        app:layout_constraintBaseline_toBaselineOf="@id/vEtName"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/vEtName" />
+
+    <EditText
+        android:id="@+id/vEtName"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="input name here"
+        android:singleLine="true"
+        android:ellipsize="start"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/vTvTipName"
+        app:layout_constraintTop_toBottomOf="@id/vIvCus2" />
+
+
+    <TextView
+        android:id="@+id/vTvTipToken"
+        android:layout_width="wrap_content"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="口  令:"
+        app:layout_constraintBaseline_toBaselineOf="@id/vEtToken"
+        app:layout_constraintLeft_toLeftOf="@id/vTvTipName"
+        />
+
+    <EditText
+        android:id="@+id/vEtToken"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="input token here"
+        android:singleLine="true"
+        android:ellipsize="start"
+        app:layout_constraintLeft_toRightOf="@id/vTvTipName"
+        app:layout_constraintTop_toBottomOf="@id/vTvTipName" />
+
+
+    <Button
+        android:id="@+id/vBtnSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="提交"
+        android:textAllCaps="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vEtToken" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

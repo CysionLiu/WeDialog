@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/WeDialog.iml" filepath="$PROJECT_DIR$/WeDialog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Wetest.iml" filepath="$PROJECT_DIR$/Wetest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wedialog/wedialog.iml" filepath="$PROJECT_DIR$/wedialog/wedialog.iml" />
+    </modules>
+  </component>
+</project>
