@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp"
     android:background="@color/we_loading_white">
 
     <ScrollView
         android:id="@+id/vScroll"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="120dp"
         android:layout_margin="10dp"
         android:fadeScrollbars="false"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -23,11 +24,7 @@
 
 从目前透露的消息看，Wi-Fi 7速度高达每秒30Gbits，可以提供更好的流媒体视频，覆盖更长的距离，并且减少拥堵问题。对于这个新的标准，Wi-Fi联盟目前还没有大范围推广。
 
-需要注意的是，最新的三个Wi-Fi标准是：IEEE 802.11n，802.11ac和802.11ax，分别被认证为Wi-Fi 4、5和6。因此，802.11be是接收Wi-Fi 7标签的有力候选者。
-
-随着5G网络商用的加速，Wi-Fi 6（IEEE 802.11ax）也将越来越普及，预计会在2023年前后取代现有的Wi-Fi标准。据了解，Wi-Fi 6能够使用1GHz至7GHz的多个RF频段，包括目前Wi-Fi使用的2.4GHz和5GHz频段，传输速度比Wi-Fi 5标准（IEEE 802.11ac）快3-4倍。
-
-另外，Wi-Fi 6还支持OFDM、高达1024QAM以及多用户的多重输入多重输出（MIMO）技术。在使用OFDA技术后，无线带宽在理论上增加了10倍，不过在现实的测试中，仅仅能够增加4倍左右"
+需要注意的是，最新的三个Wi-Fi标准是：IEEE 802.11n，802.11ac和802.11ax，分别被认证为Wi-Fi 4、5和6。因此，802.11be是接收Wi-Fi 7标签的有力候选者。"
             android:textSize="16sp" />
     </ScrollView>
 
