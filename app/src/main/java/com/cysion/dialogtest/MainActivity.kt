@@ -10,6 +10,7 @@ import com.cysion.dialogtest.handler.MyHandler
 import com.cysion.wedialog.DParams
 import com.cysion.wedialog.WeDialog
 import com.cysion.wedialog.listener.ViewHandler
+import com.cysion.wedialog.listener.YesHandler
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.dialog_custom2.view.*
 
@@ -81,6 +82,20 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 })
+        }
+
+        vTvShowCustom3.setOnClickListener {
+            WeDialog.normal(this)
+                .title("提示")
+                .text("水电费了手机放到了收到了SVN")
+                .yesText("继续")
+                .showOne(false)
+                .yes(object : YesHandler {
+                    override fun onConfirm(dialogFragment: DialogFragment) {
+                        dialogFragment.dismissAllowingStateLoss()
+                    }
+                })
+                .show()
         }
     }
 

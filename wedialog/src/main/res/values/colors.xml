@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="we_white">#ffffffff</color>
+    <color name="we_gray">#33000000</color>
     <color name="we_loading_white">#ffffffff</color>
     <color name="we_loading_background">#aa000000</color>
 
+    <color name="we_title_color">#ff000000</color>
+    <color name="we_text_color">#aa000000</color>
+    <color name="we_yes_color">#aaff0000</color>
+    <color name="we_no_color">#aa000000</color>
 
 
 </resources>

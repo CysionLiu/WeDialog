@@ -13,3 +13,9 @@ typealias EventHander<T> = (obj: T, flag: Int) -> Unit
 
 abstract class BaseViewHandler<T>(val eventHander: EventHander<T>) : ViewHandler
 
+interface YesHandler : Serializable {
+    fun onConfirm(dialogFragment: DialogFragment)
+}
+interface NoHandler : Serializable {
+    fun onCancel(dialogFragment: DialogFragment)
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="we_title_size">20dp</dimen>
+    <dimen name="we_text_size">16dp</dimen>
+    <dimen name="we_yes_size">16dp</dimen>
+    <dimen name="we_no_size">16dp</dimen>
+    <dimen name="we_normal_box_pad">10dp</dimen>
+</resources>

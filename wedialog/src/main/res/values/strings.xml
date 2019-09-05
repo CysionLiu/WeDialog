@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">wedialog</string>
     <string name="we_str_loading">加载中</string>
+    <string name="we_str_title">标题</string>
+    <string name="we_str_text">正文-----------正文</string>
+    <string name="we_str_yes_text">确定</string>
+    <string name="we_str_no_text">取消</string>
+
+
 </resources>

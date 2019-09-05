@@ -4,6 +4,7 @@ import android.view.Gravity
 import androidx.fragment.app.FragmentActivity
 import com.cysion.wedialog.dialogs.CustomDialog
 import com.cysion.wedialog.dialogs.LoadingDialog
+import com.cysion.wedialog.dialogs.NormalDialog
 
 /*
 * Manager for all real dialogs' invocation*/
@@ -61,6 +62,9 @@ object WeDialog {
         return CustomDialog.Builder(activity)
     }
 
+    fun normal(activity: FragmentActivity): NormalDialog.Builder {
+        return NormalDialog.Builder(activity)
+    }
 
 
     class Config {
