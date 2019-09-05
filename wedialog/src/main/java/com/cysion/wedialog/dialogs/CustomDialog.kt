@@ -7,9 +7,11 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.WindowManager
 import androidx.annotation.LayoutRes
+import androidx.annotation.StyleRes
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 import com.cysion.wedialog.DParams
+import com.cysion.wedialog.WeDialog
 import com.cysion.wedialog.listener.ViewHandler
 
 class CustomDialog : DialogFragment() {
@@ -22,7 +24,9 @@ class CustomDialog : DialogFragment() {
         val WE_KEY_WIDTH_RATIO = "WE_KEY_WIDTH_RATIO"
         val WE_KEY_CANCEL = "WE_KEY_CANCEL"
         val WE_KEY_CANCEL_OUTSIDE = "WE_KEY_CANCEL_OUTSIDE"
-        val WE_KEY_TAG = "WE_KEY_TAG"
+        val WE_KEY_V_Margin = "WE_KEY_V_Margin"
+        val WE_KEY_H_Margin = "WE_KEY_H_Margin"
+        val WE_KEY_ANIM = "WE_KEY_ANIM"
     }
 
     @LayoutRes
@@ -32,27 +36,22 @@ class CustomDialog : DialogFragment() {
 
     private var mBundle: Bundle = Bundle()
 
-    private var mDimCount = 0.8f
+    private var mDimCount = 0f
 
     private var mGravity = Gravity.CENTER
 
-    private var mWidthRatio = 0.9f
+    private var mWidthRatio = 0.0f
 
     private var mCancelable = true
 
     private var mCancelableOutSide = false
 
+    private var mVerMargin = 0f
+    private var mHorMargin = 0f
+    private var mWindowAnim = 0
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        savedInstanceState?.run {
-            dialogViewHandler = getSerializable(WE_KEY_LISTENER) as ViewHandler?
-            mBundle.putAll(getBundle(WE_KEY_BUNDLE))
-            mLayoutId = getInt(WE_KEY_LAYOUT)
-            mDimCount = getFloat(WE_KEY_DIM)
-            mGravity = getInt(WE_KEY_GRAVITY)
-            mWidthRatio = getFloat(WE_KEY_WIDTH_RATIO)
-            mCancelable = getBoolean(WE_KEY_CANCEL)
-            mCancelableOutSide = getBoolean(WE_KEY_CANCEL_OUTSIDE)
-        }
+        getSavedData(savedInstanceState)
         activity?.run {
             val builder = AlertDialog.Builder(activity)
             val inflater = LayoutInflater.from(activity)
@@ -65,7 +64,13 @@ class CustomDialog : DialogFragment() {
             window.setBackgroundDrawable(null)
             window.setGravity(mGravity)
             p.width = (resources.displayMetrics.widthPixels * mWidthRatio).toInt()
+            p.height = WindowManager.LayoutParams.WRAP_CONTENT
+            p.verticalMargin = mVerMargin
+            p.horizontalMargin = mHorMargin
             window.attributes = p
+            if (mWindowAnim != 0) {
+                window.setWindowAnimations(mWindowAnim)
+            }
             window.setDimAmount(mDimCount)
             dialog.show()
             dialog.setCanceledOnTouchOutside(mCancelableOutSide)
@@ -80,13 +85,32 @@ class CustomDialog : DialogFragment() {
 
     }
 
+    private fun getSavedData(savedInstanceState: Bundle?) {
+        savedInstanceState?.run {
+            dialogViewHandler = getSerializable(WE_KEY_LISTENER) as ViewHandler?
+            mBundle.putAll(getBundle(WE_KEY_BUNDLE))
+            mLayoutId = getInt(WE_KEY_LAYOUT)
+            mWindowAnim = getInt(WE_KEY_ANIM)
+            mDimCount = getFloat(WE_KEY_DIM)
+            mVerMargin = getFloat(WE_KEY_V_Margin)
+            mHorMargin = getFloat(WE_KEY_H_Margin)
+            mGravity = getInt(WE_KEY_GRAVITY)
+            mWidthRatio = getFloat(WE_KEY_WIDTH_RATIO)
+            mCancelable = getBoolean(WE_KEY_CANCEL)
+            mCancelableOutSide = getBoolean(WE_KEY_CANCEL_OUTSIDE)
+        }
+    }
+
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.run {
             putSerializable(WE_KEY_LISTENER, dialogViewHandler)
             putBundle(WE_KEY_BUNDLE, mBundle)
             putInt(WE_KEY_LAYOUT, mLayoutId)
+            putInt(WE_KEY_ANIM, mWindowAnim)
             putFloat(WE_KEY_DIM, mDimCount)
+            putFloat(WE_KEY_V_Margin, mVerMargin)
+            putFloat(WE_KEY_H_Margin, mHorMargin)
             putInt(WE_KEY_GRAVITY, mGravity)
             putFloat(WE_KEY_WIDTH_RATIO, mWidthRatio)
             putBoolean(WE_KEY_CANCEL, mCancelable)
@@ -95,16 +119,19 @@ class CustomDialog : DialogFragment() {
     }
 
 
-
     class Builder(val activity: FragmentActivity) {
 
         private var bParams: DParams = DParams()
         private var bLayoutRes: Int = 0
-        private var bDimCount = 0.8f
-        private var bGravity = Gravity.CENTER
-        private var bWidthRatio = 0.9f
-        private var bCancelable = true
-        private var bCancelableOutSide = false
+        private var bAnim: Int = 0
+        private var bVerMargin = 0f
+        private var bHorMargin = 0f
+        private var bDimCount = WeDialog.weConfig.mDimCount
+        private var bGravity = WeDialog.weConfig.mGravity
+        private var bWidthRatio = WeDialog.weConfig.mWidthRatio
+        private var bCancelable = WeDialog.weConfig.mCancelable
+        private var bCancelableOutSide = WeDialog.weConfig.mCancelableOutSide
+
 
         fun params(params: DParams): Builder {
             bParams = params
@@ -118,6 +145,11 @@ class CustomDialog : DialogFragment() {
 
         fun setGravity(gravity: Int): Builder {
             bGravity = gravity
+            return this
+        }
+
+        fun setAnim(@StyleRes styleRes: Int): Builder {
+            bAnim = styleRes
             return this
         }
 
@@ -141,6 +173,18 @@ class CustomDialog : DialogFragment() {
             return this
         }
 
+        //set vertical margin ratio from -1f to 1f
+        fun setVMargin(ratio: Float): Builder {
+            bVerMargin = ratio
+            return this
+        }
+
+        //setHorizontal margin ratio from -1f to 1f
+        fun setHMargin(ratio: Float): Builder {
+            bHorMargin = ratio
+            return this
+        }
+
         fun show(callback: ViewHandler) {
             if (bLayoutRes == 0) {
                 throw IllegalArgumentException("wrong layoutId")
@@ -149,6 +193,9 @@ class CustomDialog : DialogFragment() {
             dialog.run {
                 mBundle = bParams.bundle
                 mLayoutId = bLayoutRes
+                mWindowAnim = bAnim
+                mVerMargin = bVerMargin
+                mHorMargin = bHorMargin
                 dialogViewHandler = callback
                 mDimCount = bDimCount
                 mWidthRatio = bWidthRatio

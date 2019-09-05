@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         vTvShowloading.setOnClickListener {
             WeDialog.loading(this)
         }
+        vTvShowloading.getLocationOnScreen(IntArray(2))
         vTvCloseloading.setOnClickListener {
             for (i in 1..5) {
                 Thread {
@@ -42,7 +43,11 @@ class MainActivity : AppCompatActivity() {
             WeDialog.custom(this)
                 .layout(R.layout.dialog_custom1)
                 .setCancelable(false)
-                .setGravity(Gravity.BOTTOM)
+                .setDim(0.2f)
+                .setWidthRatio(0.5f)
+                .setGravity(Gravity.CENTER)
+                .setVMargin(-0.2f)
+                .setHMargin(0.1f)
                 .params(DParams().addParam("KEY", "click me"))
                 .show(MyHandler { obj: String, flag: Int ->
                     Toast.makeText(this, "$obj", Toast.LENGTH_SHORT).show()
@@ -55,6 +60,7 @@ class MainActivity : AppCompatActivity() {
             WeDialog.custom(this)
                 .setDim(0.6f)
                 .setWidthRatio(0.90f)
+                .setAnim(R.style.BottomDialogAnimation)
                 .setCancelableOutSide(true)
                 .layout(R.layout.dialog_custom2)
                 .params(DParams().addParam("name", tname).addParam("token", token))
@@ -77,4 +83,5 @@ class MainActivity : AppCompatActivity() {
                 })
         }
     }
+
 }
