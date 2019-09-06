@@ -13,6 +13,9 @@ class LoadingDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         activity?.run {
+            if (isFinishing) {
+                return super.onCreateDialog(savedInstanceState)
+            }
             val builder = AlertDialog.Builder(activity)
             val inflater = LayoutInflater.from(activity)
             val view = inflater.inflate(R.layout.we_dialog_loading, null)

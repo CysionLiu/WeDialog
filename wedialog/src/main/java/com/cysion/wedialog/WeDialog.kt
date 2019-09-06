@@ -66,7 +66,6 @@ object WeDialog {
         return NormalDialog.Builder(activity)
     }
 
-
     class Config {
         //0-1f
         var mDimCount = 0.5f

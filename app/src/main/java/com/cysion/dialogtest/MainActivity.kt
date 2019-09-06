@@ -1,15 +1,12 @@
 package com.cysion.dialogtest
 
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.DialogFragment
-import com.cysion.dialogtest.handler.MyHandler
-import com.cysion.wedialog.DParams
 import com.cysion.wedialog.WeDialog
-import com.cysion.wedialog.listener.ViewHandler
+import com.cysion.wedialog.WeParams
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.dialog_custom1.view.*
 import kotlinx.android.synthetic.main.dialog_custom2.view.*
 
 class MainActivity : AppCompatActivity() {
@@ -42,13 +39,19 @@ class MainActivity : AppCompatActivity() {
             WeDialog.custom(this)
                 .layout(R.layout.dialog_custom1)
                 .setCancelable(false)
+                .setAnim(R.style.dAnimation_fade)
+                .setDim(0.1f)
                 .setWidthRatio(0.5f)
-                .setVMargin(-0.2f)
-                .setHMargin(0.1f)
-                .params(DParams().addParam("KEY", "click me"))
-                .show(MyHandler { obj: String, flag: Int ->
-                    Toast.makeText(this, "$obj", Toast.LENGTH_SHORT).show()
-                })
+                .setVMargin(-0.15f)
+                .setHMargin(-0.15f)
+                .params(WeParams().addParam("KEY", "click me"))
+                .show { df, dialogView, bundle ->
+                    dialogView.vBtnCus1.text = bundle.getString("KEY")
+                    dialogView.vBtnCus1.setOnClickListener {
+                        Toast.makeText(this, "hello world", Toast.LENGTH_SHORT).show()
+                        df.dismissAllowingStateLoss()
+                    }
+                }
         }
 
         vTvShowCustom2.setOnClickListener {
@@ -57,35 +60,33 @@ class MainActivity : AppCompatActivity() {
             WeDialog.custom(this)
                 .setAnim(R.style.BottomDialogAnimation)
                 .layout(R.layout.dialog_custom2)
-                .params(DParams().addParam("name", tname).addParam("token", token))
-                .show(object : ViewHandler {
-                    override fun handle(
-                        dialogFragment: DialogFragment,
-                        dialogView: View,
-                        bundle: Bundle
-                    ) {
-                        dialogView.vEtName.setText(bundle.getString("name"))
-                        dialogView.vEtToken.setText(bundle.getString("token"))
-                        dialogView.vBtnSubmit.setOnClickListener {
-                            Toast.makeText(
-                                this@MainActivity, "name:${dialogView.vEtName.text}" +
-                                        ";token:${dialogView.vEtToken.text}", Toast.LENGTH_SHORT
-                            ).show()
-                            dialogFragment.dismissAllowingStateLoss()
-                        }
+                .params(WeParams().addParam("name", tname).addParam("token", token))
+                .show { df, dialogView, bundle ->
+                    dialogView.vEtName.setText(bundle.getString("name"))
+                    dialogView.vEtToken.setText(bundle.getString("token"))
+                    dialogView.vBtnSubmit.setOnClickListener {
+                        Toast.makeText(
+                            this@MainActivity, "name:${dialogView.vEtName.text}" +
+                                    ";token:${dialogView.vEtToken.text}", Toast.LENGTH_SHORT
+                        ).show()
+                        df.dismissAllowingStateLoss()
                     }
-                })
+                }
         }
 
         vTvShowCustom3.setOnClickListener {
             WeDialog.normal(this)
                 .title("注意啦.")
                 .msg("You have done a good job !")
-                .clickCancel {
-
-                }
                 .show {
-                    Toast.makeText(this,"yes",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "yes", Toast.LENGTH_SHORT).show()
+                    WeDialog.custom(this)
+                        .layout(R.layout.dialog_custom2)
+                        .show { df, dialogView, bundle ->
+                            dialogView.setOnClickListener {
+                                df.dismissAllowingStateLoss()
+                            }
+                        }
                 }
         }
     }

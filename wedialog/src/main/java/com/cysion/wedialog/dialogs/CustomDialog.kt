@@ -10,13 +10,14 @@ import androidx.annotation.LayoutRes
 import androidx.annotation.StyleRes
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
-import com.cysion.wedialog.DParams
 import com.cysion.wedialog.WeDialog
-import com.cysion.wedialog.listener.ViewHandler
+import com.cysion.wedialog.WeParams
+import com.cysion.wedialog.listener.ListenerHolder
+import com.cysion.wedialog.listener.OnViewHandler
 
 class CustomDialog : DialogFragment() {
     companion object {
-        val WE_KEY_LISTENER = "WE_KEY_LISTENER"
+        val WE_KEY_EVENT_HOLDER = "WE_KEY_EVENT_HOLDER"
         val WE_KEY_BUNDLE = "WE_KEY_BUNDLE"
         val WE_KEY_LAYOUT = "WE_KEY_LAYOUT"
         val WE_KEY_DIM = "WE_KEY_DIM"
@@ -32,7 +33,7 @@ class CustomDialog : DialogFragment() {
     @LayoutRes
     private var mLayoutId: Int = 0
 
-    private var dialogViewHandler: ViewHandler? = null
+    private var mListenerHolder: ListenerHolder? = null
 
     private var mBundle: Bundle = Bundle()
 
@@ -53,6 +54,9 @@ class CustomDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         getSavedData(savedInstanceState)
         activity?.run {
+            if (isFinishing) {
+                return super.onCreateDialog(savedInstanceState)
+            }
             val builder = AlertDialog.Builder(activity)
             val inflater = LayoutInflater.from(activity)
             val view = inflater.inflate(mLayoutId, null)
@@ -75,7 +79,7 @@ class CustomDialog : DialogFragment() {
             dialog.show()
             dialog.setCanceledOnTouchOutside(mCancelableOutSide)
             setCancelable(mCancelable)
-            dialogViewHandler?.handle(this@CustomDialog, view, mBundle)
+            mListenerHolder?.aViewHandler?.invoke(this@CustomDialog, view, mBundle)
             dialog.setContentView(view)
             dialog.window!!.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
             dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
@@ -87,7 +91,7 @@ class CustomDialog : DialogFragment() {
 
     private fun getSavedData(savedInstanceState: Bundle?) {
         savedInstanceState?.run {
-            dialogViewHandler = getSerializable(WE_KEY_LISTENER) as ViewHandler?
+            mListenerHolder = getSerializable(WE_KEY_EVENT_HOLDER) as ListenerHolder?
             mBundle.putAll(getBundle(WE_KEY_BUNDLE))
             mLayoutId = getInt(WE_KEY_LAYOUT)
             mWindowAnim = getInt(WE_KEY_ANIM)
@@ -104,7 +108,7 @@ class CustomDialog : DialogFragment() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.run {
-            putSerializable(WE_KEY_LISTENER, dialogViewHandler)
+            putSerializable(WE_KEY_EVENT_HOLDER, mListenerHolder)
             putBundle(WE_KEY_BUNDLE, mBundle)
             putInt(WE_KEY_LAYOUT, mLayoutId)
             putInt(WE_KEY_ANIM, mWindowAnim)
@@ -121,7 +125,7 @@ class CustomDialog : DialogFragment() {
 
     class Builder(val activity: FragmentActivity) {
 
-        private var bParams: DParams = DParams()
+        private var bParams: WeParams = WeParams()
         private var bLayoutRes: Int = 0
         private var bAnim: Int = 0
         private var bVerMargin = 0f
@@ -133,7 +137,7 @@ class CustomDialog : DialogFragment() {
         private var bCancelableOutSide = WeDialog.weConfig.mCancelableOutSide
 
 
-        fun params(params: DParams): Builder {
+        fun params(params: WeParams): Builder {
             bParams = params
             return this
         }
@@ -185,7 +189,7 @@ class CustomDialog : DialogFragment() {
             return this
         }
 
-        fun show(callback: ViewHandler) {
+        fun show(viewHandler: OnViewHandler) {
             if (bLayoutRes == 0) {
                 throw IllegalArgumentException("wrong layoutId")
             }
@@ -196,13 +200,14 @@ class CustomDialog : DialogFragment() {
                 mWindowAnim = bAnim
                 mVerMargin = bVerMargin
                 mHorMargin = bHorMargin
-                dialogViewHandler = callback
                 mDimCount = bDimCount
                 mWidthRatio = bWidthRatio
                 mGravity = bGravity
                 mCancelableOutSide = bCancelableOutSide
                 mCancelable = bCancelable
+                mListenerHolder = ListenerHolder(aViewHandler = viewHandler)
             }
+            dialog.isAdded
             dialog.show(activity.supportFragmentManager, "")
         }
     }

@@ -4,14 +4,14 @@ import android.os.Bundle
 import android.os.Parcelable
 import java.io.Serializable
 
-class DParams {
+class WeParams {
     val bundle: Bundle = Bundle()
-    fun addParam(key: String, value: Serializable): DParams {
+    fun addParam(key: String, value: Serializable): WeParams {
         bundle.putSerializable(key, value)
         return this
     }
 
-    fun addParam(key: String, value: Parcelable): DParams {
+    fun addParam(key: String, value: Parcelable): WeParams {
         bundle.putParcelable(key, value)
         return this
     }

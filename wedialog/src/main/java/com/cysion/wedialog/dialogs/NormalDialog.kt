@@ -14,7 +14,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 import com.cysion.wedialog.R
 import com.cysion.wedialog.WeDialog
-import com.cysion.wedialog.listener.EventHolder
+import com.cysion.wedialog.listener.ListenerHolder
 import com.cysion.wedialog.listener.OnNoHandler
 import com.cysion.wedialog.listener.OnYesHandler
 import kotlinx.android.synthetic.main.we_dialog_normal.view.*
@@ -42,7 +42,7 @@ class NormalDialog : DialogFragment() {
     private var mCancelable = true
     private var mCancelableOutSide = false
     private var mWindowAnim = 0
-    private var mEventHolder: EventHolder? = null
+    private var mListenerHolder: ListenerHolder? = null
 
     private var mTitle: String? = null
     //start with "#"
@@ -59,6 +59,9 @@ class NormalDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         getSavedData(savedInstanceState)
         activity?.run {
+            if (isFinishing) {
+                return super.onCreateDialog(savedInstanceState)
+            }
             val builder = AlertDialog.Builder(activity)
             val inflater = LayoutInflater.from(activity)
             val view = inflater.inflate(R.layout.we_dialog_normal, null)
@@ -120,13 +123,11 @@ class NormalDialog : DialogFragment() {
             }
             we_btn_negative.visibility = if (mShowOneBtn) View.GONE else View.VISIBLE
             we_btn_positive.setOnClickListener {
-                //                mYesHandler?.onConfirm(this@NormalDialog)
-                mEventHolder?.handler?.invoke(this@NormalDialog)
+                mListenerHolder?.aYesHandler?.invoke(this@NormalDialog)
             }
             we_btn_negative.setOnClickListener {
                 dismissAllowingStateLoss()
-//                mNoHandler?.onCancel(this@NormalDialog)
-                mEventHolder?.noHandler?.invoke(this@NormalDialog)
+                mListenerHolder?.aNoHandler?.invoke(this@NormalDialog)
             }
 
         }
@@ -134,7 +135,7 @@ class NormalDialog : DialogFragment() {
 
     private fun getSavedData(savedInstanceState: Bundle?) {
         savedInstanceState?.run {
-            mEventHolder = getSerializable(WE_KEY_EVENT_HOLDER) as EventHolder?
+            mListenerHolder = getSerializable(WE_KEY_EVENT_HOLDER) as ListenerHolder?
             mWindowAnim = getInt(WE_KEY_ANIM)
             mWidthRatio = getFloat(WE_KEY_WIDTH_RATIO)
             mCancelable = getBoolean(WE_KEY_CANCEL)
@@ -154,7 +155,7 @@ class NormalDialog : DialogFragment() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.run {
-            putSerializable(WE_KEY_EVENT_HOLDER, mEventHolder)
+            putSerializable(WE_KEY_EVENT_HOLDER, mListenerHolder)
             putInt(WE_KEY_ANIM, mWindowAnim)
             putFloat(WE_KEY_WIDTH_RATIO, mWidthRatio)
             putBoolean(WE_KEY_CANCEL, mCancelable)
@@ -282,7 +283,7 @@ class NormalDialog : DialogFragment() {
                 mYesColor = bYesColor
                 mNoText = bNoText
                 mShowOneBtn = bShowOneBtn
-                mEventHolder = EventHolder(yesHandler, bOnNoHandler)
+                mListenerHolder = ListenerHolder(yesHandler, bOnNoHandler)
             }
             dialog.show(activity.supportFragmentManager, tag)
         }
