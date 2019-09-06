@@ -19,3 +19,10 @@ interface YesHandler : Serializable {
 interface NoHandler : Serializable {
     fun onCancel(dialogFragment: DialogFragment)
 }
+
+typealias OnViewHandler = (df: DialogFragment, dialogView: View, bundle: Bundle)  -> Unit
+
+typealias OnYesHandler = (df: DialogFragment)  -> Unit
+typealias OnNoHandler = (df: DialogFragment)  -> Unit
+
+data class EventHolder(var handler: OnYesHandler?,var noHandler: OnNoHandler?) :Serializable

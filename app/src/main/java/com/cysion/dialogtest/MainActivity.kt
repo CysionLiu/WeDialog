@@ -1,7 +1,6 @@
 package com.cysion.dialogtest
 
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +9,6 @@ import com.cysion.dialogtest.handler.MyHandler
 import com.cysion.wedialog.DParams
 import com.cysion.wedialog.WeDialog
 import com.cysion.wedialog.listener.ViewHandler
-import com.cysion.wedialog.listener.YesHandler
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.dialog_custom2.view.*
 
@@ -44,9 +42,7 @@ class MainActivity : AppCompatActivity() {
             WeDialog.custom(this)
                 .layout(R.layout.dialog_custom1)
                 .setCancelable(false)
-                .setDim(0.2f)
                 .setWidthRatio(0.5f)
-                .setGravity(Gravity.CENTER)
                 .setVMargin(-0.2f)
                 .setHMargin(0.1f)
                 .params(DParams().addParam("KEY", "click me"))
@@ -59,10 +55,7 @@ class MainActivity : AppCompatActivity() {
             val tname = "xiao ming"
             val token = "123"
             WeDialog.custom(this)
-                .setDim(0.6f)
-                .setWidthRatio(0.90f)
                 .setAnim(R.style.BottomDialogAnimation)
-                .setCancelableOutSide(true)
                 .layout(R.layout.dialog_custom2)
                 .params(DParams().addParam("name", tname).addParam("token", token))
                 .show(object : ViewHandler {
@@ -86,16 +79,14 @@ class MainActivity : AppCompatActivity() {
 
         vTvShowCustom3.setOnClickListener {
             WeDialog.normal(this)
-                .title("提示")
-                .text("水电费了手机放到了收到了SVN")
-                .yesText("继续")
-                .showOne(false)
-                .yes(object : YesHandler {
-                    override fun onConfirm(dialogFragment: DialogFragment) {
-                        dialogFragment.dismissAllowingStateLoss()
-                    }
-                })
-                .show()
+                .title("注意啦.")
+                .msg("You have done a good job !")
+                .clickCancel {
+
+                }
+                .show {
+                    Toast.makeText(this,"yes",Toast.LENGTH_SHORT).show()
+                }
         }
     }
 

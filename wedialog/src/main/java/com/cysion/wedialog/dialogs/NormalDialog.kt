@@ -14,22 +14,22 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 import com.cysion.wedialog.R
 import com.cysion.wedialog.WeDialog
-import com.cysion.wedialog.listener.NoHandler
-import com.cysion.wedialog.listener.YesHandler
+import com.cysion.wedialog.listener.EventHolder
+import com.cysion.wedialog.listener.OnNoHandler
+import com.cysion.wedialog.listener.OnYesHandler
 import kotlinx.android.synthetic.main.we_dialog_normal.view.*
 
 class NormalDialog : DialogFragment() {
 
     companion object {
-        val WE_KEY_YES_LISTENER = "WE_KEY_YES_LISTENER"
-        val WE_KEY_NO_LISTENER = "WE_KEY_NO_LISTENER"
+        val WE_KEY_EVENT_HOLDER = "WE_KEY_EVENT_HOLDER"
         val WE_KEY_WIDTH_RATIO = "WE_KEY_WIDTH_RATIO"
         val WE_KEY_CANCEL = "WE_KEY_CANCEL"
         val WE_KEY_CANCEL_OUTSIDE = "WE_KEY_CANCEL_OUTSIDE"
         val WE_KEY_ANIM = "WE_KEY_ANIM"
         //----
         val WE_KEY_TITLE = "WE_KEY_TITLE"
-        val WE_KEY_TITLE_SIZE = "WE_KEY_TITLE_SIZE"
+        val WE_KEY_TEXT_SIZE = "WE_KEY_TEXT_SIZE"
         val WE_KEY_TITLE_COLOR = "WE_KEY_TITLE_COLOR"
         val WE_KEY_TEXT = "WE_KEY_TEXT"
         val WE_KEY_YES_TEXT = "WE_KEY_YES_TEXT"
@@ -42,13 +42,12 @@ class NormalDialog : DialogFragment() {
     private var mCancelable = true
     private var mCancelableOutSide = false
     private var mWindowAnim = 0
-    private var mYesHandler: YesHandler? = null
-    private var mNoHandler: NoHandler? = null
+    private var mEventHolder: EventHolder? = null
 
     private var mTitle: String? = null
     //start with "#"
     private var mTitleColor: String? = null
-    private var mTitleSize: Int = 0
+    private var mTextSize: Int = 0
     private var mText: String? = null
     private var mYesText: String? = null
     //start with "#"
@@ -116,16 +115,18 @@ class NormalDialog : DialogFragment() {
             if (!TextUtils.isEmpty(mYesColor) && mYesColor?.startsWith("#")!!) {
                 we_btn_positive.setTextColor(Color.parseColor(mYesColor))
             }
-            if (mTitleSize > 0) {
-                we_tv_title.setTextSize(mTitleSize.toFloat())
+            if (mTextSize > 0) {
+                we_tv_text.setTextSize(mTextSize.toFloat())
             }
             we_btn_negative.visibility = if (mShowOneBtn) View.GONE else View.VISIBLE
             we_btn_positive.setOnClickListener {
-                mYesHandler?.onConfirm(this@NormalDialog)
+                //                mYesHandler?.onConfirm(this@NormalDialog)
+                mEventHolder?.handler?.invoke(this@NormalDialog)
             }
             we_btn_negative.setOnClickListener {
                 dismissAllowingStateLoss()
-                mNoHandler?.onCancel(this@NormalDialog)
+//                mNoHandler?.onCancel(this@NormalDialog)
+                mEventHolder?.noHandler?.invoke(this@NormalDialog)
             }
 
         }
@@ -133,8 +134,7 @@ class NormalDialog : DialogFragment() {
 
     private fun getSavedData(savedInstanceState: Bundle?) {
         savedInstanceState?.run {
-            mNoHandler = getSerializable(WE_KEY_NO_LISTENER) as NoHandler?
-            mYesHandler = getSerializable(WE_KEY_YES_LISTENER) as YesHandler?
+            mEventHolder = getSerializable(WE_KEY_EVENT_HOLDER) as EventHolder?
             mWindowAnim = getInt(WE_KEY_ANIM)
             mWidthRatio = getFloat(WE_KEY_WIDTH_RATIO)
             mCancelable = getBoolean(WE_KEY_CANCEL)
@@ -142,7 +142,7 @@ class NormalDialog : DialogFragment() {
 
             mTitle = getString(WE_KEY_TITLE)
             mTitleColor = getString(WE_KEY_TITLE_COLOR)
-            mTitleSize = getInt(WE_KEY_TITLE_SIZE)
+            mTextSize = getInt(WE_KEY_TEXT_SIZE)
             mText = getString(WE_KEY_TEXT)
             mYesText = getString(WE_KEY_YES_TEXT)
             mYesColor = getString(WE_KEY_YES_COLOR)
@@ -154,8 +154,7 @@ class NormalDialog : DialogFragment() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.run {
-            putSerializable(WE_KEY_NO_LISTENER, mNoHandler)
-            putSerializable(WE_KEY_YES_LISTENER, mYesHandler)
+            putSerializable(WE_KEY_EVENT_HOLDER, mEventHolder)
             putInt(WE_KEY_ANIM, mWindowAnim)
             putFloat(WE_KEY_WIDTH_RATIO, mWidthRatio)
             putBoolean(WE_KEY_CANCEL, mCancelable)
@@ -163,7 +162,7 @@ class NormalDialog : DialogFragment() {
 
             putString(WE_KEY_TITLE, mTitle)
             putString(WE_KEY_TITLE_COLOR, mTitleColor)
-            putInt(WE_KEY_TITLE_SIZE, mTitleSize)
+            putInt(WE_KEY_TEXT_SIZE, mTextSize)
             putString(WE_KEY_TEXT, mText)
             putString(WE_KEY_YES_TEXT, mYesText)
             putString(WE_KEY_YES_COLOR, mYesColor)
@@ -181,12 +180,12 @@ class NormalDialog : DialogFragment() {
         private var bWidthRatio = WeDialog.weConfig.mWidthRatio
         private var bCancelable = WeDialog.weConfig.mCancelable
         private var bCancelableOutSide = WeDialog.weConfig.mCancelableOutSide
-        private var bYesHandler: YesHandler? = null
-        private var bNoHandler: NoHandler? = null
+        private var bOnNoHandler: OnNoHandler? = null
+
         private var bTitle: String? = null
         //start with "#"
         private var bTitleColor: String? = null
-        private var bTitleSize: Int = 0
+        private var bTextSize: Int = 0
         private var bText: String? = null
         private var bYesText: String? = null
         //start with "#"
@@ -229,12 +228,12 @@ class NormalDialog : DialogFragment() {
             return this
         }
 
-        fun titleSize(size: Int): Builder {
-            bTitleSize = size
+        fun msgSize(size: Int): Builder {
+            bTextSize = size
             return this
         }
 
-        fun text(text: String): Builder {
+        fun msg(text: String): Builder {
             bText = text
             return this
         }
@@ -259,37 +258,33 @@ class NormalDialog : DialogFragment() {
             return this
         }
 
-        fun yes(yesHandler: YesHandler): Builder {
-            bYesHandler = yesHandler
+        fun clickCancel(noHandler: OnNoHandler): Builder {
+            bOnNoHandler = noHandler
             return this
         }
 
-        fun no(noHandler: NoHandler): Builder {
-            bNoHandler = noHandler
-            return this
+        fun show(yesHandler: OnYesHandler) {
+            show("", yesHandler)
         }
 
-        fun show() {
+        fun show(tag: String, yesHandler: OnYesHandler) {
             val dialog = NormalDialog()
             dialog.run {
                 mWindowAnim = bAnim
                 mWidthRatio = bWidthRatio
                 mCancelableOutSide = bCancelableOutSide
                 mCancelable = bCancelable
-                mYesHandler = bYesHandler
-                mNoHandler = bNoHandler
                 mTitle = bTitle
                 mTitleColor = bTitleColor
-                mTitleSize = bTitleSize
+                mTextSize = bTextSize
                 mText = bText
                 mYesText = bYesText
                 mYesColor = bYesColor
                 mNoText = bNoText
                 mShowOneBtn = bShowOneBtn
-                mNoHandler=bNoHandler
-                mYesHandler = bYesHandler
+                mEventHolder = EventHolder(yesHandler, bOnNoHandler)
             }
-            dialog.show(activity.supportFragmentManager, "")
+            dialog.show(activity.supportFragmentManager, tag)
         }
     }
 }
