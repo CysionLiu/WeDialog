@@ -78,5 +78,7 @@ object WeDialog {
         var mCancelable = true
 
         var mCancelableOutSide = false
+
+        var mAnimStyle = 0
     }
 }

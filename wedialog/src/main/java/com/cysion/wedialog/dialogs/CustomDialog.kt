@@ -3,8 +3,10 @@ package com.cysion.wedialog.dialogs
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.View
 import android.view.WindowManager
 import androidx.annotation.LayoutRes
 import androidx.annotation.StyleRes
@@ -50,6 +52,7 @@ class CustomDialog : DialogFragment() {
     private var mVerMargin = 0f
     private var mHorMargin = 0f
     private var mWindowAnim = 0
+    private var mAnchor: View? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         getSavedData(savedInstanceState)
@@ -69,14 +72,61 @@ class CustomDialog : DialogFragment() {
             window.setGravity(mGravity)
             p.width = (resources.displayMetrics.widthPixels * mWidthRatio).toInt()
             p.height = WindowManager.LayoutParams.WRAP_CONTENT
-            p.verticalMargin = mVerMargin
-            p.horizontalMargin = mHorMargin
+
+            var toAnchorX = 0f
+            var toAnchorY = 0f
+            //设置锚点
+            mAnchor?.run {
+                val ord = IntArray(2)
+                getLocationInWindow(ord)
+                val sw = resources.displayMetrics.widthPixels
+                val sh = resources.displayMetrics.heightPixels
+                if ((ord[0] + width / 2) <= sw / 2) {
+                    if (ord[1] + height / 2 < sh / 2) {
+                        window.setGravity(Gravity.TOP)
+                        //left-top
+                        val xdelta = ord[0] + width-(sw/2-p.width/2)
+                        val ydelta = ord[1]+height/2
+                        toAnchorX = (xdelta * 1f / sw)*1.1f
+                        toAnchorY = ydelta * 1f / sh
+                    } else {
+                        //left-bottom
+                        window.setGravity(Gravity.BOTTOM)
+                        val xdelta = ord[0] + width-(sw/2-p.width/2)
+                        val ydelta = sh-ord[1]+height
+                        toAnchorX = (xdelta * 1f / sw)*1.1f
+                        toAnchorY = ydelta * 1f / sh
+                    }
+                }else{
+                    if (ord[1] + height / 2 < sh / 2) {
+                        window.setGravity(Gravity.TOP)
+                        //right-top
+                        val xdelta = ord[0]-(sw/2+p.width/2)
+                        val ydelta = ord[1]+height/2
+                        toAnchorX = (xdelta * 1f / sw)*1.1f
+                        toAnchorY = ydelta * 1f / sh
+                    } else {
+                        //right-bottom
+                        window.setGravity(Gravity.BOTTOM)
+                        val xdelta = ord[0] -(sw/2+p.width/2)
+                        val ydelta = sh-ord[1]+height
+                        toAnchorX = (xdelta * 1f / sw)*1.1f
+                        toAnchorY = ydelta * 1f / sh
+                    }
+                }
+            }
+            p.verticalMargin = mVerMargin + toAnchorY
+            p.horizontalMargin = mHorMargin + toAnchorX
             window.attributes = p
+            if (WeDialog.weConfig.mAnimStyle != 0) {
+                window.setWindowAnimations(WeDialog.weConfig.mAnimStyle)
+            }
             if (mWindowAnim != 0) {
                 window.setWindowAnimations(mWindowAnim)
             }
             window.setDimAmount(mDimCount)
             dialog.show()
+            Log.d("--d", "${view.width}")
             dialog.setCanceledOnTouchOutside(mCancelableOutSide)
             setCancelable(mCancelable)
             mListenerHolder?.aViewHandler?.invoke(this@CustomDialog, view, mBundle)
@@ -135,6 +185,7 @@ class CustomDialog : DialogFragment() {
         private var bWidthRatio = WeDialog.weConfig.mWidthRatio
         private var bCancelable = WeDialog.weConfig.mCancelable
         private var bCancelableOutSide = WeDialog.weConfig.mCancelableOutSide
+        private var bAnchorView: View? = null
 
 
         fun params(params: WeParams): Builder {
@@ -183,6 +234,11 @@ class CustomDialog : DialogFragment() {
             return this
         }
 
+        fun anchor(anchor: View): Builder {
+            bAnchorView = anchor
+            return this
+        }
+
         //setHorizontal margin ratio from -1f to 1f
         fun setHMargin(ratio: Float): Builder {
             bHorMargin = ratio
@@ -205,9 +261,9 @@ class CustomDialog : DialogFragment() {
                 mGravity = bGravity
                 mCancelableOutSide = bCancelableOutSide
                 mCancelable = bCancelable
+                mAnchor = bAnchorView
                 mListenerHolder = ListenerHolder(aViewHandler = viewHandler)
             }
-            dialog.isAdded
             dialog.show(activity.supportFragmentManager, "")
         }
     }

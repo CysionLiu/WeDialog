@@ -55,7 +55,7 @@
         android:id="@+id/vTvCustomTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:text="自定义"
         android:textSize="@dimen/title_size"
         app:layout_constraintLeft_toLeftOf="parent"

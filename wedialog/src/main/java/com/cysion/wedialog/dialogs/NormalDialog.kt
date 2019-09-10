@@ -76,6 +76,9 @@ class NormalDialog : DialogFragment() {
             p.width = (resources.displayMetrics.widthPixels * mWidthRatio).toInt()
             p.height = WindowManager.LayoutParams.WRAP_CONTENT
             window.attributes = p
+            if (WeDialog.weConfig.mAnimStyle != 0) {
+                window.setWindowAnimations(WeDialog.weConfig.mAnimStyle)
+            }
             if (mWindowAnim != 0) {
                 window.setWindowAnimations(mWindowAnim)
             }
@@ -254,7 +257,7 @@ class NormalDialog : DialogFragment() {
             return this
         }
 
-        fun showOne(show: Boolean): Builder {
+        fun showOneBtn(show: Boolean): Builder {
             bShowOneBtn = show
             return this
         }
