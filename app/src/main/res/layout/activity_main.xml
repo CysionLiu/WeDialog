@@ -98,6 +98,17 @@
         android:textColor="@color/blue_text"
         android:textSize="@dimen/text_size"
         app:layout_constraintLeft_toRightOf="@id/vTvShowCustom2"
+        app:layout_constraintRight_toLeftOf="@id/vTvShowCustom4"
+        app:layout_constraintTop_toBottomOf="@id/vTvCustomTitle" />
+    <Button
+        android:id="@+id/vTvShowCustom4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/str_jump_anchor"
+        android:textColor="@color/blue_text"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintLeft_toRightOf="@id/vTvShowCustom3"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/vTvCustomTitle" />
 

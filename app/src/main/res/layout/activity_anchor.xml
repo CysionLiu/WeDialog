@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.cysion.dialogtest.AnchorActivity">
+
+
+    <Button
+        android:id="@+id/vTvLeftTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="left-top"
+        android:textAllCaps="false"
+        android:includeFontPadding="false"
+        android:textSize="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/vTvLeftBottom"
+        android:layout_width="wrap_content"
+        android:textAllCaps="false"
+        android:layout_height="wrap_content"
+        android:text="left-bottom"
+        android:textSize="25dp"
+        android:includeFontPadding="false"
+        android:layout_marginBottom="130dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+
+    <RadioButton
+        android:id="@+id/vTvRightBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:includeFontPadding="false"
+        android:text="right-bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+
+    <TextView
+        android:id="@+id/vTvRightTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="right-top"
+        android:textSize="20dp"
+        android:layout_marginTop="60dp"
+        android:textAllCaps="false"
+        android:includeFontPadding="true"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/vBtnShowAnchor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="show"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

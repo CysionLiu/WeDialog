@@ -87,14 +87,14 @@ class CustomDialog : DialogFragment() {
                         //left-top
                         val xdelta = ord[0] + width-(sw/2-p.width/2)
                         val ydelta = ord[1]+height/2
-                        toAnchorX = (xdelta * 1f / sw)*1.1f
+                        toAnchorX = (xdelta * 1f / sw)
                         toAnchorY = ydelta * 1f / sh
                     } else {
                         //left-bottom
                         window.setGravity(Gravity.BOTTOM)
                         val xdelta = ord[0] + width-(sw/2-p.width/2)
-                        val ydelta = sh-ord[1]+height
-                        toAnchorX = (xdelta * 1f / sw)*1.1f
+                        val ydelta = sh-ord[1]+height/2
+                        toAnchorX = (xdelta * 1f / sw)
                         toAnchorY = ydelta * 1f / sh
                     }
                 }else{
@@ -103,14 +103,14 @@ class CustomDialog : DialogFragment() {
                         //right-top
                         val xdelta = ord[0]-(sw/2+p.width/2)
                         val ydelta = ord[1]+height/2
-                        toAnchorX = (xdelta * 1f / sw)*1.1f
+                        toAnchorX = (xdelta * 1f / sw)
                         toAnchorY = ydelta * 1f / sh
                     } else {
                         //right-bottom
                         window.setGravity(Gravity.BOTTOM)
                         val xdelta = ord[0] -(sw/2+p.width/2)
-                        val ydelta = sh-ord[1]+height
-                        toAnchorX = (xdelta * 1f / sw)*1.1f
+                        val ydelta = sh-ord[1]+height/2
+                        toAnchorX = (xdelta * 1f / sw)
                         toAnchorY = ydelta * 1f / sh
                     }
                 }

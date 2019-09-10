@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">dialogLib</string>
+    <string name="str_jump_anchor">anchor</string>
+</resources>

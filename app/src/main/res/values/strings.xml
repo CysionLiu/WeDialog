@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">dialogLib</string>
+    <string name="str_jump_anchor">锚点</string>
+    <string name="str_i_am_dialog">我是对话框</string>
 </resources>

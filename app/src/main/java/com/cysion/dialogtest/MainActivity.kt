@@ -1,5 +1,6 @@
 package com.cysion.dialogtest
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -75,48 +76,25 @@ class MainActivity : AppCompatActivity() {
         }
 
         vTvShowCustom3.setOnClickListener {
-//            WeDialog.custom(this)
-//                .layout(R.layout.dialog_custom0)
-//                .setWidthRatio(0.3f)
-//                .anchor(vTvShowloading)
-//                .show { df, dialogView, bundle ->
-//
-//                }
-//            WeDialog.custom(this)
-//                .layout(R.layout.dialog_custom0)
-//                .setWidthRatio(0.3f)
-//                .anchor(vTvCloseloading)
-//                .show { df, dialogView, bundle ->
-//
-//                }
-//            WeDialog.custom(this)
-//                .layout(R.layout.dialog_custom0)
-//                .setWidthRatio(0.3f)
-//                .anchor(vTvShowCustom1)
-//                .show { df, dialogView, bundle ->
-//
-//                }
             WeDialog.custom(this)
                 .layout(R.layout.dialog_custom0)
                 .setWidthRatio(0.3f)
-                .anchor(vTvLeftBottom)
+                .anchor(vTvShowloading)
                 .show { df, dialogView, bundle ->
 
                 }
-//            WeDialog.custom(this)
-//                .layout(R.layout.dialog_custom0)
-//                .setWidthRatio(0.3f)
-//                .anchor(vTvShowCustom2)
-//                .show { df, dialogView, bundle ->
-//
-//                }
-//            WeDialog.custom(this)
-//                .layout(R.layout.dialog_custom0)
-//                .setWidthRatio(0.3f)
-//                .anchor(vTvShowCustom3)
-//                .show { df, dialogView, bundle ->
-//
-//                }
+            WeDialog.custom(this)
+                .layout(R.layout.dialog_custom0)
+                .setWidthRatio(0.3f)
+                .anchor(vTvShowCustom3)
+                .show { df, dialogView, bundle ->
+
+                }
+
+        }
+
+        vTvShowCustom4.setOnClickListener {
+            startActivity(Intent(this,AnchorActivity::class.java))
         }
     }
 }
