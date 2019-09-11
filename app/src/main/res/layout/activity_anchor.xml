@@ -53,7 +53,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:background="@color/blue_light_bg"
-        android:includeFontPadding="true"
         android:text="right-top"
         android:layout_marginRight="6dp"
         android:textAllCaps="false"

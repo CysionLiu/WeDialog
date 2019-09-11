@@ -41,7 +41,7 @@ class AnchorActivity : AppCompatActivity() {
                     .setDim(0f)
                     .anchor(vTvRightBottom)
                     .show { df, dialogView, bundle -> }
-            }, 2000)
+            }, 1500)
 
         }
     }

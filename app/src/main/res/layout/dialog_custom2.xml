@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         app:layout_constraintHorizontal_chainStyle="packed"
-        android:text="用户名："
+        android:text="@string/str_username"
         app:layout_constraintBaseline_toBaselineOf="@id/vEtName"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/vEtName" />
@@ -46,7 +46,7 @@
         app:layout_constraintHorizontal_chainStyle="packed"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="口  令:"
+        android:text="@string/str_token"
         app:layout_constraintBaseline_toBaselineOf="@id/vEtToken"
         app:layout_constraintLeft_toLeftOf="@id/vTvTipName"
         />
@@ -68,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="提交"
+        android:text="@string/str_submit"
         android:textAllCaps="false"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

@@ -189,7 +189,6 @@ class NormalDialog : DialogFragment() {
     class Builder(val activity: FragmentActivity) {
 
         private var bAnim: Int = 0
-        private var bDimCount = WeDialog.weConfig.mDimCount
         private var bWidthRatio = WeDialog.weConfig.mWidthRatio
         private var bCancelable = WeDialog.weConfig.mCancelable
         private var bCancelableOutSide = WeDialog.weConfig.mCancelableOutSide
@@ -211,11 +210,6 @@ class NormalDialog : DialogFragment() {
             return this
         }
 
-        fun setDim(dim: Float): Builder {
-            bDimCount = dim
-            return this
-        }
-
         fun setWidthRatio(ratio: Float): Builder {
             bWidthRatio = ratio
             return this
@@ -231,37 +225,37 @@ class NormalDialog : DialogFragment() {
             return this
         }
 
-        fun title(title: String): Builder {
+        fun setTitle(title: String): Builder {
             bTitle = title
             return this
         }
 
-        fun titleColor(color: String): Builder {
+        fun setTitleColor(color: String): Builder {
             bTitleColor = color
             return this
         }
 
-        fun msgSize(size: Int): Builder {
+        fun setMsgSize(size: Int): Builder {
             bTextSize = size
             return this
         }
 
-        fun msg(text: String): Builder {
+        fun setMsg(text: String): Builder {
             bText = text
             return this
         }
 
-        fun yesText(text: String): Builder {
+        fun setYesText(text: String): Builder {
             bYesText = text
             return this
         }
 
-        fun yesTextColor(color: String): Builder {
+        fun setYesColor(color: String): Builder {
             bYesColor = color
             return this
         }
 
-        fun noText(text: String): Builder {
+        fun setNoText(text: String): Builder {
             bNoText = text
             return this
         }

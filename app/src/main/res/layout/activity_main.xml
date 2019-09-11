@@ -1,123 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/vTvLoadingTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="加载框"
-        android:textSize="@dimen/title_size"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <Button
-        android:id="@+id/vTvShowloading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="显示"
-        android:textColor="@color/blue_text"
-        android:textSize="@dimen/text_size"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/vTvCloseloading"
-        app:layout_constraintTop_toBottomOf="@id/vTvLoadingTitle" />
-
-
-    <Button
-        android:id="@+id/vTvCloseloading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="随机展示"
-        android:textColor="@color/blue_text"
-        android:textSize="@dimen/text_size"
-        app:layout_constraintLeft_toRightOf="@id/vTvShowloading"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/vTvLoadingTitle" />
-
-    <View
-        android:id="@+id/vLoadingDiv"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="10dp"
-        android:background="#ff000000"
-        app:layout_constraintTop_toBottomOf="@id/vTvCloseloading" />
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/vTvCustomTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="自定义"
-        android:textSize="@dimen/title_size"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/vLoadingDiv" />
+        <TextView
+            android:id="@+id/vTvLoadingTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/str_load_hint"
+            android:textSize="@dimen/title_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-    <Button
-        android:id="@+id/vTvShowCustom1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="显示1"
-        android:textColor="@color/blue_text"
-        android:textSize="@dimen/text_size"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/vTvShowCustom2"
-        app:layout_constraintTop_toBottomOf="@id/vTvCustomTitle" />
+        <Button
+            android:id="@+id/vTvShowloading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/str_loading_once"
+            android:textColor="@color/blue_text"
+            android:textSize="@dimen/text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/vTvCloseloading"
+            app:layout_constraintTop_toBottomOf="@id/vTvLoadingTitle" />
 
 
-    <Button
-        android:id="@+id/vTvShowCustom2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="显示2"
-        android:textColor="@color/blue_text"
-        android:textSize="@dimen/text_size"
-        app:layout_constraintLeft_toRightOf="@id/vTvShowCustom1"
-        app:layout_constraintRight_toLeftOf="@id/vTvShowCustom3"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/vTvCustomTitle" />
+        <Button
+            android:id="@+id/vTvCloseloading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/str_loading_random"
+            android:textColor="@color/blue_text"
+            android:textSize="@dimen/text_size"
+            app:layout_constraintLeft_toRightOf="@id/vTvShowloading"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vTvLoadingTitle" />
 
-    <Button
-        android:id="@+id/vTvShowCustom3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="显示3"
-        android:textColor="@color/blue_text"
-        android:textSize="@dimen/text_size"
-        app:layout_constraintLeft_toRightOf="@id/vTvShowCustom2"
-        app:layout_constraintRight_toLeftOf="@id/vTvShowCustom4"
-        app:layout_constraintTop_toBottomOf="@id/vTvCustomTitle" />
-    <Button
-        android:id="@+id/vTvShowCustom4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/str_jump_anchor"
-        android:textColor="@color/blue_text"
-        android:textSize="@dimen/text_size"
-        app:layout_constraintLeft_toRightOf="@id/vTvShowCustom3"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/vTvCustomTitle" />
+        <View
+            android:id="@+id/vLoadingDiv"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="#ff000000"
+            app:layout_constraintTop_toBottomOf="@id/vTvCloseloading" />
 
-    <View
-        android:id="@+id/vLoadingDiv2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="10dp"
-        android:background="#ff000000"
-        app:layout_constraintTop_toBottomOf="@id/vTvShowCustom3" />
+        <TextView
+            android:id="@+id/vTvCustomTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/str_custom_hint"
+            android:textSize="@dimen/title_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vLoadingDiv" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/vTvShowCustom1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/str_custom_simple"
+            android:textColor="@color/blue_text"
+            android:textSize="@dimen/text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/vTvShowCustom2"
+            app:layout_constraintTop_toBottomOf="@id/vTvCustomTitle" />
+
+
+        <Button
+            android:id="@+id/vTvShowCustom2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/str_custom_param"
+            android:textColor="@color/blue_text"
+            android:textSize="@dimen/text_size"
+            app:layout_constraintLeft_toRightOf="@id/vTvShowCustom1"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vTvCustomTitle" />
+
+        <Button
+            android:id="@+id/vTvShowCustom3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/str_custom_complex"
+            android:textColor="@color/blue_text"
+            android:textSize="@dimen/text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/vTvShowCustom4"
+            app:layout_constraintTop_toBottomOf="@id/vTvShowCustom2" />
+
+        <Button
+            android:id="@+id/vTvShowCustom4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/str_jump_anchor"
+            android:textColor="@color/blue_text"
+            android:textSize="@dimen/text_size"
+            app:layout_constraintLeft_toRightOf="@id/vTvShowCustom3"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vTvShowCustom2" />
+
+        <View
+            android:id="@+id/vLoadingDiv2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="#ff000000"
+            app:layout_constraintTop_toBottomOf="@id/vTvShowCustom3" />
+
+
+        <TextView
+            android:id="@+id/vTvNormalTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/str_normal_hint"
+            android:textSize="@dimen/title_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vLoadingDiv2" />
+
+
+        <Button
+            android:id="@+id/vTvShowNormal1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/str_custom_simple"
+            android:textColor="@color/blue_text"
+            android:textSize="@dimen/text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/vTvShowNormal2"
+            app:layout_constraintTop_toBottomOf="@id/vTvNormalTitle" />
+
+        <Button
+            android:id="@+id/vTvShowNormal2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/str_normal_normal"
+            android:textColor="@color/blue_text"
+            android:textSize="@dimen/text_size"
+            app:layout_constraintLeft_toRightOf="@id/vTvShowNormal1"
+            app:layout_constraintRight_toLeftOf="@id/vTvShowNormal3"
+            app:layout_constraintTop_toBottomOf="@id/vTvNormalTitle" />
+
+        <Button
+            android:id="@+id/vTvShowNormal3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/str_normal_complex"
+            android:textColor="@color/blue_text"
+            android:textSize="@dimen/text_size"
+            app:layout_constraintLeft_toRightOf="@id/vTvShowNormal2"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vTvNormalTitle" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

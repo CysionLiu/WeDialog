@@ -2,6 +2,7 @@ package com.cysion.dialogtest
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.cysion.wedialog.WeDialog
@@ -15,10 +16,119 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        //if you want init sth globally,you can invoke this;
+        WeDialog.initOnce(WeDialog.Config().apply {
+            mGravity = Gravity.CENTER
+            mDimCount=0.2f
+        })
+        showLoading()
+        showCustom()
+        showNormal()
+    }
+
+
+
+
+
+    private fun showNormal() {
+
+        vTvShowNormal1.setOnClickListener {
+            WeDialog.normal(this)
+                .setMsg(getString(R.string.str_goog_job))
+                .showOneBtn(true)
+                .show {
+                    it.dismissAllowingStateLoss()
+                }
+        }
+
+
+        vTvShowNormal2.setOnClickListener {
+            WeDialog.normal(this)
+                .setTitle(getString(R.string.str_notice))
+                .setMsg(getString(R.string.str_goog_job))
+                .clickCancel {
+                    Toast.makeText(this,getString(R.string.str_cancel),Toast.LENGTH_SHORT).show()
+                }
+                .show {
+                    it.dismissAllowingStateLoss()
+                    Toast.makeText(this,getString(R.string.str_confirm),Toast.LENGTH_SHORT).show()
+                }
+        }
+
+
+        vTvShowNormal3.setOnClickListener {
+            WeDialog.normal(this)
+                .setTitle(getString(R.string.str_notice))
+                .setMsg(getString(R.string.str_goog_job))
+                .setAnim(R.style.BottomDialogAnimation)
+                .setCancelable(false)
+                .setMsgSize(20)
+                .setTitleColor("#ffff0000")
+                .setYesText(getString(R.string.str_confirm))
+                .setNoText(getString(R.string.str_cancel))
+                .clickCancel {
+                    Toast.makeText(this,getString(R.string.str_cancel),Toast.LENGTH_SHORT).show()
+                }
+                .show {
+                    it.dismissAllowingStateLoss()
+                    Toast.makeText(this,getString(R.string.str_confirm),Toast.LENGTH_SHORT).show()
+                }
+        }
+    }
+
+    private fun showCustom() {
+        vTvShowCustom1.setOnClickListener {
+            WeDialog.custom(this)
+                .layout(R.layout.dialog_custom0)
+                .show()
+        }
+
+        vTvShowCustom2.setOnClickListener {
+            WeDialog.custom(this)
+                .layout(R.layout.dialog_custom1)
+                .setCancelable(false)
+                .setAnim(R.style.dAnimation_fade)
+                .params(WeParams().addParam("KEY", "click me"))
+                .show { df, dialogView, bundle ->
+                    dialogView.vBtnCus1.text = bundle.getString("KEY")
+                    dialogView.vBtnCus1.setOnClickListener {
+                        Toast.makeText(this, "hello world", Toast.LENGTH_SHORT).show()
+                        df.dismissAllowingStateLoss()
+                    }
+                }
+        }
+
+        vTvShowCustom3.setOnClickListener {
+            val tname = "xiao ming"
+            val token = "123"
+            WeDialog.custom(this)
+                .setAnim(R.style.BottomDialogAnimation)
+                .layout(R.layout.dialog_custom2)
+                .setDim(0.8f)
+                .setXOffset(100)
+                .params(WeParams().addParam("name", tname).addParam("token", token))
+                .show { df, dialogView, bundle ->
+                    dialogView.vEtName.setText(bundle.getString("name"))
+                    dialogView.vEtToken.setText(bundle.getString("token"))
+                    dialogView.vBtnSubmit.setOnClickListener {
+                        Toast.makeText(
+                            this@MainActivity, "name:${dialogView.vEtName.text}" +
+                                    ";token:${dialogView.vEtToken.text}", Toast.LENGTH_SHORT
+                        ).show()
+                        df.dismissAllowingStateLoss()
+                    }
+                }
+        }
+
+        vTvShowCustom4.setOnClickListener {
+            startActivity(Intent(this, AnchorActivity::class.java))
+        }
+    }
+
+    private fun showLoading() {
         vTvShowloading.setOnClickListener {
             WeDialog.loading(this)
         }
-        vTvShowloading.getLocationOnScreen(IntArray(2))
         vTvCloseloading.setOnClickListener {
             for (i in 1..5) {
                 Thread {
@@ -34,60 +144,6 @@ class MainActivity : AppCompatActivity() {
                     }
                 }.start()
             }
-        }
-
-        vTvShowCustom1.setOnClickListener {
-            WeDialog.custom(this)
-                .layout(R.layout.dialog_custom1)
-                .setCancelable(false)
-                .setAnim(R.style.dAnimation_fade)
-                .setDim(0.1f)
-                .setWidthRatio(0.5f)
-                .setYOffset(-330)
-                .setXOffset(-180)
-                .params(WeParams().addParam("KEY", "click me"))
-                .show { df, dialogView, bundle ->
-                    dialogView.vBtnCus1.text = bundle.getString("KEY")
-                    dialogView.vBtnCus1.setOnClickListener {
-                        Toast.makeText(this, "hello world", Toast.LENGTH_SHORT).show()
-                        df.dismissAllowingStateLoss()
-                    }
-                }
-        }
-
-        vTvShowCustom2.setOnClickListener {
-            val tname = "xiao ming"
-            val token = "123"
-            WeDialog.custom(this)
-                .setAnim(R.style.BottomDialogAnimation)
-                .layout(R.layout.dialog_custom2)
-                .params(WeParams().addParam("name", tname).addParam("token", token))
-                .show { df, dialogView, bundle ->
-                    dialogView.vEtName.setText(bundle.getString("name"))
-                    dialogView.vEtToken.setText(bundle.getString("token"))
-                    dialogView.vBtnSubmit.setOnClickListener {
-                        Toast.makeText(
-                            this@MainActivity, "name:${dialogView.vEtName.text}" +
-                                    ";token:${dialogView.vEtToken.text}", Toast.LENGTH_SHORT
-                        ).show()
-                        df.dismissAllowingStateLoss()
-                    }
-                }
-        }
-
-        vTvShowCustom3.setOnClickListener {
-            WeDialog.custom(this)
-                .layout(R.layout.dialog_custom0)
-                .setWidthRatio(0.3f)
-                .anchor(vTvShowloading)
-                .show { df, dialogView, bundle ->
-
-                }
-
-        }
-
-        vTvShowCustom4.setOnClickListener {
-            startActivity(Intent(this,AnchorActivity::class.java))
         }
     }
 }

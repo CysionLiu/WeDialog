@@ -301,6 +301,12 @@ class CustomDialog : DialogFragment() {
             return this
         }
 
+        fun show() {
+            show { df, dialogView, bundle ->
+
+            }
+        }
+
         fun show(viewHandler: OnViewHandler) {
             if (bLayoutRes == 0) {
                 throw IllegalArgumentException("wrong layoutId")

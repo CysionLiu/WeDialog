@@ -1,4 +1,24 @@
 <resources>
     <string name="app_name">dialogLib</string>
     <string name="str_jump_anchor">anchor</string>
+    <string name="str_load_hint">Loading</string>
+    <string name="str_loading_once">show</string>
+    <string name="str_loading_random">show random</string>
+    <string name="str_long">The iPhone 11 has a dual camera, which includes a second camera featuring an ultra-wide lens. Artificial intelligence capabilities in the camera will auto-adjust lighting and reduce noise to allow users to take low-light images and more detailed portraits. It also features a front-facing portrait mode and slo-mo video capabilities in the front-facing camera.</string>
+    <string name="str_i_am_dialog">I am dialog</string>
+    <string name="str_custom_hint">Custom</string>
+    <string name="str_custom_simple">Simple</string>
+    <string name="str_custom_param">Params</string>
+    <string name="str_custom_complex">Complex</string>
+    <string name="str_normal_simple">Simple</string>
+    <string name="str_normal_normal">Normal</string>
+    <string name="str_normal_complex">Complex</string>
+    <string name="str_normal_hint">Dialog</string>
+    <string name="str_username">Username:</string>
+    <string name="str_token">Token :</string>
+    <string name="str_submit">Submit</string>
+    <string name="str_goog_job">You have done a good job</string>
+    <string name="str_notice">Notice</string>
+    <string name="str_confirm">Confirm</string>
+    <string name="str_cancel">Cancel</string>
 </resources>

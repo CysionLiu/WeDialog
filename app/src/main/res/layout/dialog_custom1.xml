@@ -20,11 +20,7 @@
             android:id="@+id/vTvCus1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="这Wi-Fi 6才刚刚开始有普及的意思，科学家们已经开始着手推进Wi-Fi 7了。
-
-从目前透露的消息看，Wi-Fi 7速度高达每秒30Gbits，可以提供更好的流媒体视频，覆盖更长的距离，并且减少拥堵问题。对于这个新的标准，Wi-Fi联盟目前还没有大范围推广。
-
-需要注意的是，最新的三个Wi-Fi标准是：IEEE 802.11n，802.11ac和802.11ax，分别被认证为Wi-Fi 4、5和6。因此，802.11be是接收Wi-Fi 7标签的有力候选者。"
+            android:text="@string/str_long"
             android:textSize="16sp" />
     </ScrollView>
 
@@ -33,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="btn"
+        android:text=""
         android:textAllCaps="false"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

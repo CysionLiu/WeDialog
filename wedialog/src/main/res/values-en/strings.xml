@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">wedialog</string>
+    <string name="we_str_loading">Loading</string>
+    <string name="we_str_title">Title</string>
+    <string name="we_str_text">I am msg.</string>
+    <string name="we_str_yes_text">Yes</string>
+    <string name="we_str_no_text">No</string>
+
+</resources>

@@ -1,5 +1,24 @@
 <resources>
     <string name="app_name">dialogLib</string>
-    <string name="str_jump_anchor">锚点</string>
     <string name="str_i_am_dialog">我是对话框</string>
+    <string name="str_load_hint">加载框</string>
+    <string name="str_loading_once">加载一次</string>
+    <string name="str_loading_random">随机展示</string>
+    <string name="str_custom_hint">自定义框</string>
+    <string name="str_custom_simple">简单版</string>
+    <string name="str_custom_param">参数回调</string>
+    <string name="str_custom_complex">复杂版</string>
+    <string name="str_jump_anchor">锚点展示</string>
+    <string name="str_normal_simple">简单版</string>
+    <string name="str_normal_normal">普通版</string>
+    <string name="str_normal_complex">复杂版</string>
+    <string name="str_normal_hint">对话框</string>
+    <string name="str_long">iPhone 11采用了双摄像头，其中一个为超广角镜头。摄像头搭载的人工智能技术可以自动调节光线并降噪，用户可以拍摄低亮度环境的照片以及细节更加优化的人像。同时，前置摄像头有人像模式，还可以拍摄慢动作视频。</string>
+    <string name="str_username">用户名：</string>
+    <string name="str_token">口 令:</string>
+    <string name="str_submit">提交</string>
+    <string name="str_goog_job">You have done a good job</string>
+    <string name="str_notice">Notice</string>
+    <string name="str_confirm">Confirm</string>
+    <string name="str_cancel">Cancel</string>
 </resources>
