@@ -43,8 +43,8 @@ class MainActivity : AppCompatActivity() {
                 .setAnim(R.style.dAnimation_fade)
                 .setDim(0.1f)
                 .setWidthRatio(0.5f)
-                .setVMargin(-0.15f)
-                .setHMargin(-0.15f)
+                .setYOffset(-330)
+                .setXOffset(-180)
                 .params(WeParams().addParam("KEY", "click me"))
                 .show { df, dialogView, bundle ->
                     dialogView.vBtnCus1.text = bundle.getString("KEY")
@@ -80,13 +80,6 @@ class MainActivity : AppCompatActivity() {
                 .layout(R.layout.dialog_custom0)
                 .setWidthRatio(0.3f)
                 .anchor(vTvShowloading)
-                .show { df, dialogView, bundle ->
-
-                }
-            WeDialog.custom(this)
-                .layout(R.layout.dialog_custom0)
-                .setWidthRatio(0.3f)
-                .anchor(vTvShowCustom3)
                 .show { df, dialogView, bundle ->
 
                 }

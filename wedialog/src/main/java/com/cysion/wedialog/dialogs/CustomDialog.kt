@@ -3,7 +3,7 @@ package com.cysion.wedialog.dialogs
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
+import android.util.DisplayMetrics
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -12,10 +12,12 @@ import androidx.annotation.LayoutRes
 import androidx.annotation.StyleRes
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import com.cysion.wedialog.WeDialog
 import com.cysion.wedialog.WeParams
 import com.cysion.wedialog.listener.ListenerHolder
 import com.cysion.wedialog.listener.OnViewHandler
+
 
 class CustomDialog : DialogFragment() {
     companion object {
@@ -49,8 +51,8 @@ class CustomDialog : DialogFragment() {
 
     private var mCancelableOutSide = false
 
-    private var mVerMargin = 0f
-    private var mHorMargin = 0f
+    private var mYOffset = 0
+    private var mXOffset = 0
     private var mWindowAnim = 0
     private var mAnchor: View? = null
 
@@ -64,59 +66,68 @@ class CustomDialog : DialogFragment() {
             val inflater = LayoutInflater.from(activity)
             val view = inflater.inflate(mLayoutId, null)
             val dialog = builder.create()
+            dialog.show()
             val window = dialog.window
-            //摆脱token的限制，注意清单文件alert权限
-            val p = window!!.attributes // 获取对话框当前的参数值
+            val p = window!!.attributes
             window.decorView.setBackgroundColor(0X00000000)
             window.setBackgroundDrawable(null)
             window.setGravity(mGravity)
             p.width = (resources.displayMetrics.widthPixels * mWidthRatio).toInt()
             p.height = WindowManager.LayoutParams.WRAP_CONTENT
 
-            var toAnchorX = 0f
-            var toAnchorY = 0f
-            //设置锚点
+            val sw = resources.displayMetrics.widthPixels
+            val realHeight = getHasVirtualKey()
+            val disHeight = resources.displayMetrics.heightPixels
+            val sta = getStatusBarHeight()
+            val nav = getNavigationBarHeight()
+            var sh = disHeight
+            if (realHeight.equals(disHeight + sta)) {
+                sh = realHeight
+            } else if (realHeight.equals(disHeight + nav)) {
+                sh = disHeight
+            } else if (realHeight.equals(disHeight + nav + sta)) {
+                sh = realHeight - nav
+            }
+            //set anchor
             mAnchor?.run {
                 val ord = IntArray(2)
                 getLocationInWindow(ord)
-                val sw = resources.displayMetrics.widthPixels
-                val sh = resources.displayMetrics.heightPixels
                 if ((ord[0] + width / 2) <= sw / 2) {
                     if (ord[1] + height / 2 < sh / 2) {
                         window.setGravity(Gravity.TOP)
                         //left-top
-                        val xdelta = ord[0] + width-(sw/2-p.width/2)
-                        val ydelta = ord[1]+height/2
-                        toAnchorX = (xdelta * 1f / sw)
-                        toAnchorY = ydelta * 1f / sh
+                        val xdelta = ord[0] + width - (sw / 2 - p.width / 2)
+                        val ydelta = ord[1] + height - getStatusBarHeight()
+                        p.y = p.y + ydelta
+                        p.x = p.x + xdelta
                     } else {
                         //left-bottom
                         window.setGravity(Gravity.BOTTOM)
-                        val xdelta = ord[0] + width-(sw/2-p.width/2)
-                        val ydelta = sh-ord[1]+height/2
-                        toAnchorX = (xdelta * 1f / sw)
-                        toAnchorY = ydelta * 1f / sh
+                        val xdelta = ord[0] + width - (sw / 2 - p.width / 2)
+                        val ydelta = sh - ord[1]
+                        p.y = p.y + ydelta
+                        p.x = p.x + xdelta
                     }
-                }else{
+                } else {
                     if (ord[1] + height / 2 < sh / 2) {
                         window.setGravity(Gravity.TOP)
                         //right-top
-                        val xdelta = ord[0]-(sw/2+p.width/2)
-                        val ydelta = ord[1]+height/2
-                        toAnchorX = (xdelta * 1f / sw)
-                        toAnchorY = ydelta * 1f / sh
+                        val xdelta = ord[0] - (sw / 2 + p.width / 2)
+                        val ydelta = ord[1] + height - getStatusBarHeight()
+                        p.y = p.y + ydelta
+                        p.x = p.x + xdelta
                     } else {
                         //right-bottom
                         window.setGravity(Gravity.BOTTOM)
-                        val xdelta = ord[0] -(sw/2+p.width/2)
-                        val ydelta = sh-ord[1]+height/2
-                        toAnchorX = (xdelta * 1f / sw)
-                        toAnchorY = ydelta * 1f / sh
+                        val xdelta = ord[0] - (sw / 2 + p.width / 2)
+                        val ydelta = sh - ord[1]
+                        p.y = p.y + ydelta
+                        p.x = p.x + xdelta
                     }
                 }
             }
-            p.verticalMargin = mVerMargin + toAnchorY
-            p.horizontalMargin = mHorMargin + toAnchorX
+            p.y = p.y + mYOffset
+            p.x = p.x + mXOffset
             window.attributes = p
             if (WeDialog.weConfig.mAnimStyle != 0) {
                 window.setWindowAnimations(WeDialog.weConfig.mAnimStyle)
@@ -125,14 +136,12 @@ class CustomDialog : DialogFragment() {
                 window.setWindowAnimations(mWindowAnim)
             }
             window.setDimAmount(mDimCount)
-            dialog.show()
-            Log.d("--d", "${view.width}")
+            dialog.window!!.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
+            dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
             dialog.setCanceledOnTouchOutside(mCancelableOutSide)
             setCancelable(mCancelable)
             mListenerHolder?.aViewHandler?.invoke(this@CustomDialog, view, mBundle)
             dialog.setContentView(view)
-            dialog.window!!.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
-            dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
             return dialog
         }
         return super.onCreateDialog(savedInstanceState)
@@ -146,8 +155,8 @@ class CustomDialog : DialogFragment() {
             mLayoutId = getInt(WE_KEY_LAYOUT)
             mWindowAnim = getInt(WE_KEY_ANIM)
             mDimCount = getFloat(WE_KEY_DIM)
-            mVerMargin = getFloat(WE_KEY_V_Margin)
-            mHorMargin = getFloat(WE_KEY_H_Margin)
+            mYOffset = getInt(WE_KEY_V_Margin)
+            mXOffset = getInt(WE_KEY_H_Margin)
             mGravity = getInt(WE_KEY_GRAVITY)
             mWidthRatio = getFloat(WE_KEY_WIDTH_RATIO)
             mCancelable = getBoolean(WE_KEY_CANCEL)
@@ -163,8 +172,8 @@ class CustomDialog : DialogFragment() {
             putInt(WE_KEY_LAYOUT, mLayoutId)
             putInt(WE_KEY_ANIM, mWindowAnim)
             putFloat(WE_KEY_DIM, mDimCount)
-            putFloat(WE_KEY_V_Margin, mVerMargin)
-            putFloat(WE_KEY_H_Margin, mHorMargin)
+            putInt(WE_KEY_V_Margin, mYOffset)
+            putInt(WE_KEY_H_Margin, mXOffset)
             putInt(WE_KEY_GRAVITY, mGravity)
             putFloat(WE_KEY_WIDTH_RATIO, mWidthRatio)
             putBoolean(WE_KEY_CANCEL, mCancelable)
@@ -172,14 +181,61 @@ class CustomDialog : DialogFragment() {
         }
     }
 
+    fun getStatusBarHeight(): Int {
+        val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
+        if (resourceId == 0) {
+            return 20 * resources.displayMetrics.density.toInt()
+        }
+        return resources.getDimensionPixelSize(resourceId)
+    }
+
+    //get bottom nav height
+    fun getNavigationBarHeight(): Int {
+        var result = 0
+        val res = resources
+        val resourceId = res.getIdentifier("navigation_bar_height", "dimen", "android")
+        if (resourceId > 0) {
+            result = res.getDimensionPixelSize(resourceId)
+        }
+        return result
+    }
+
+    private fun getHasVirtualKey(): Int {
+        activity?.run {
+            var dpi = 0
+            val display = window.windowManager.getDefaultDisplay()
+            val dm = DisplayMetrics()
+            val c: Class<*>
+            try {
+                c = Class.forName("android.view.Display")
+                val method = c.getMethod("getRealMetrics", DisplayMetrics::class.java)
+                method.invoke(display, dm)
+                dpi = dm.heightPixels
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+            return dpi
+        }
+        return resources.displayMetrics.heightPixels
+    }
+
+    override fun show(manager: FragmentManager?, tag: String?) {
+        try {
+            super.show(manager, tag)
+        } catch (e: java.lang.Exception) {
+            val ft = manager?.beginTransaction()
+            ft?.add(this, tag)
+            ft?.commitAllowingStateLoss()
+        }
+    }
 
     class Builder(val activity: FragmentActivity) {
 
         private var bParams: WeParams = WeParams()
         private var bLayoutRes: Int = 0
         private var bAnim: Int = 0
-        private var bVerMargin = 0f
-        private var bHorMargin = 0f
+        private var bYOffset = 0
+        private var bXOffset = 0
         private var bDimCount = WeDialog.weConfig.mDimCount
         private var bGravity = WeDialog.weConfig.mGravity
         private var bWidthRatio = WeDialog.weConfig.mWidthRatio
@@ -229,8 +285,8 @@ class CustomDialog : DialogFragment() {
         }
 
         //set vertical margin ratio from -1f to 1f
-        fun setVMargin(ratio: Float): Builder {
-            bVerMargin = ratio
+        fun setYOffset(offset: Int): Builder {
+            bYOffset = offset
             return this
         }
 
@@ -240,8 +296,8 @@ class CustomDialog : DialogFragment() {
         }
 
         //setHorizontal margin ratio from -1f to 1f
-        fun setHMargin(ratio: Float): Builder {
-            bHorMargin = ratio
+        fun setXOffset(offset: Int): Builder {
+            bXOffset = offset
             return this
         }
 
@@ -254,8 +310,8 @@ class CustomDialog : DialogFragment() {
                 mBundle = bParams.bundle
                 mLayoutId = bLayoutRes
                 mWindowAnim = bAnim
-                mVerMargin = bVerMargin
-                mHorMargin = bHorMargin
+                mYOffset = bYOffset
+                mXOffset = bXOffset
                 mDimCount = bDimCount
                 mWidthRatio = bWidthRatio
                 mGravity = bGravity

@@ -12,6 +12,7 @@ import android.view.WindowManager
 import androidx.annotation.StyleRes
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import com.cysion.wedialog.R
 import com.cysion.wedialog.WeDialog
 import com.cysion.wedialog.listener.ListenerHolder
@@ -67,9 +68,9 @@ class NormalDialog : DialogFragment() {
             val view = inflater.inflate(R.layout.we_dialog_normal, null)
             initViewAndEvent(view)
             val dialog = builder.create()
+            dialog.show()
             val window = dialog.window
-            //摆脱token的限制，注意清单文件alert权限
-            val p = window!!.attributes // 获取对话框当前的参数值
+            val p = window!!.attributes
             window.decorView.setBackgroundColor(0X00000000)
             window.setBackgroundDrawable(null)
             window.setGravity(Gravity.CENTER)
@@ -83,7 +84,6 @@ class NormalDialog : DialogFragment() {
                 window.setWindowAnimations(mWindowAnim)
             }
             window.setDimAmount(WeDialog.weConfig.mDimCount)
-            dialog.show()
             dialog.setCanceledOnTouchOutside(mCancelableOutSide)
             setCancelable(mCancelable)
             dialog.setContentView(view)
@@ -173,6 +173,15 @@ class NormalDialog : DialogFragment() {
             putString(WE_KEY_NO_TEXT, mNoText)
             putBoolean(WE_KEY_SHOW_ONE, mShowOneBtn)
 
+        }
+    }
+    override fun show(manager: FragmentManager?, tag: String?) {
+        try {
+            super.show(manager, tag)
+        } catch (e: java.lang.Exception) {
+            val ft = manager?.beginTransaction()
+            ft?.add(this, tag)
+            ft?.commitAllowingStateLoss()
         }
     }
 

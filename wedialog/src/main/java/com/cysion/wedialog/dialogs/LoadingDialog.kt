@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import com.cysion.wedialog.R
 import com.cysion.wedialog.WeDialog
 
@@ -20,17 +21,16 @@ class LoadingDialog : DialogFragment() {
             val inflater = LayoutInflater.from(activity)
             val view = inflater.inflate(R.layout.we_dialog_loading, null)
             val dialog = builder.create()
+            dialog.show()
             val window = dialog.window
             dialog.setCanceledOnTouchOutside(WeDialog.weConfig.mCancelableOutSide)
             setCancelable(WeDialog.weConfig.mCancelable)
-            //摆脱token的限制，注意清单文件alert权限
-            val p = window!!.attributes // 获取对话框当前的参数值
+            val p = window!!.attributes
             window.decorView.setBackgroundColor(0X00000000)
             p.width = (resources.displayMetrics.widthPixels*WeDialog.weConfig.mWidthRatio).toInt()
             window.attributes = p
             window.setDimAmount(WeDialog.weConfig.mDimCount)
             window.setBackgroundDrawable(null)
-            dialog.show()
             dialog.setContentView(view)
             dialog.window!!.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
             dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
@@ -38,4 +38,15 @@ class LoadingDialog : DialogFragment() {
         }
         return super.onCreateDialog(savedInstanceState)
     }
+
+    override fun show(manager: FragmentManager?, tag: String?) {
+        try {
+            super.show(manager, tag)
+        } catch (e: java.lang.Exception) {
+            val ft = manager?.beginTransaction()
+            ft?.add(this, tag)
+            ft?.commitAllowingStateLoss()
+        }
+    }
+
 }
