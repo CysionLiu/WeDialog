@@ -55,6 +55,7 @@ class NormalDialog : DialogFragment() {
     private var mYesColor: String? = null
     private var mNoText: String? = null
     private var mShowOneBtn = false
+    private var mSaveState: Bundle? = null
 
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -138,7 +139,9 @@ class NormalDialog : DialogFragment() {
 
     private fun getSavedData(savedInstanceState: Bundle?) {
         savedInstanceState?.run {
-            mListenerHolder = getSerializable(WE_KEY_EVENT_HOLDER) as ListenerHolder?
+            mListenerHolder ?: run {
+                mListenerHolder = getSerializable(WE_KEY_EVENT_HOLDER) as ListenerHolder?
+            }
             mWindowAnim = getInt(WE_KEY_ANIM)
             mWidthRatio = getFloat(WE_KEY_WIDTH_RATIO)
             mCancelable = getBoolean(WE_KEY_CANCEL)
@@ -157,8 +160,8 @@ class NormalDialog : DialogFragment() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
+        mSaveState = outState
         outState.run {
-            putSerializable(WE_KEY_EVENT_HOLDER, mListenerHolder)
             putInt(WE_KEY_ANIM, mWindowAnim)
             putFloat(WE_KEY_WIDTH_RATIO, mWidthRatio)
             putBoolean(WE_KEY_CANCEL, mCancelable)
@@ -175,6 +178,12 @@ class NormalDialog : DialogFragment() {
 
         }
     }
+
+    override fun onDetach() {
+        super.onDetach()
+        mSaveState?.putSerializable(WE_KEY_EVENT_HOLDER, mListenerHolder)
+    }
+
     override fun show(manager: FragmentManager?, tag: String?) {
         try {
             super.show(manager, tag)

@@ -3,7 +3,7 @@
     <string name="str_i_am_dialog">我是对话框</string>
     <string name="str_load_hint">加载框</string>
     <string name="str_loading_once">加载一次</string>
-    <string name="str_loading_random">随机展示</string>
+    <string name="str_loading_random">随机展示5s</string>
     <string name="str_custom_hint">自定义框</string>
     <string name="str_custom_simple">简单版</string>
     <string name="str_custom_param">参数回调</string>

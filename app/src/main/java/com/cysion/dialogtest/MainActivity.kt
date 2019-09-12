@@ -13,21 +13,19 @@ import kotlinx.android.synthetic.main.dialog_custom2.view.*
 
 class MainActivity : AppCompatActivity() {
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         //if you want init sth globally,you can invoke this;
         WeDialog.initOnce(WeDialog.Config().apply {
             mGravity = Gravity.CENTER
-            mDimCount=0.2f
+            mDimCount = 0.2f
         })
         showLoading()
         showCustom()
         showNormal()
     }
-
-
-
 
 
     private fun showNormal() {
@@ -47,11 +45,11 @@ class MainActivity : AppCompatActivity() {
                 .setTitle(getString(R.string.str_notice))
                 .setMsg(getString(R.string.str_goog_job))
                 .clickCancel {
-                    Toast.makeText(this,getString(R.string.str_cancel),Toast.LENGTH_SHORT).show()
+                    WeDialog.loading(this@MainActivity)
                 }
                 .show {
                     it.dismissAllowingStateLoss()
-                    Toast.makeText(this,getString(R.string.str_confirm),Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.str_confirm), Toast.LENGTH_SHORT).show()
                 }
         }
 
@@ -67,11 +65,18 @@ class MainActivity : AppCompatActivity() {
                 .setYesText(getString(R.string.str_confirm))
                 .setNoText(getString(R.string.str_cancel))
                 .clickCancel {
-                    Toast.makeText(this,getString(R.string.str_cancel),Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.str_cancel), Toast.LENGTH_SHORT).show()
                 }
                 .show {
-                    it.dismissAllowingStateLoss()
-                    Toast.makeText(this,getString(R.string.str_confirm),Toast.LENGTH_SHORT).show()
+                    runOnUiThread {
+                        WeDialog.custom(this@MainActivity)
+                            .layout(R.layout.dialog_custom0)
+                            .show { df, dialogView, bundle ->
+                                dialogView.setOnClickListener { _ ->
+                                    df.dismissAllowingStateLoss()
+                                }
+                            }
+                    }
                 }
         }
     }
@@ -84,13 +89,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         vTvShowCustom2.setOnClickListener {
+            val s = "click me"
             WeDialog.custom(this)
                 .layout(R.layout.dialog_custom1)
-                .setCancelable(false)
                 .setAnim(R.style.dAnimation_fade)
-                .params(WeParams().addParam("KEY", "click me"))
                 .show { df, dialogView, bundle ->
-                    dialogView.vBtnCus1.text = bundle.getString("KEY")
+                    dialogView.vBtnCus1.text = s
                     dialogView.vBtnCus1.setOnClickListener {
                         Toast.makeText(this, "hello world", Toast.LENGTH_SHORT).show()
                         df.dismissAllowingStateLoss()
@@ -100,20 +104,20 @@ class MainActivity : AppCompatActivity() {
 
         vTvShowCustom3.setOnClickListener {
             val tname = "xiao ming"
-            val token = "123"
             WeDialog.custom(this)
                 .setAnim(R.style.BottomDialogAnimation)
                 .layout(R.layout.dialog_custom2)
-                .setDim(0.8f)
+                .setDim(0.7f)
                 .setXOffset(100)
-                .params(WeParams().addParam("name", tname).addParam("token", token))
+                .params(WeParams().addParam("token", "123"))
                 .show { df, dialogView, bundle ->
-                    dialogView.vEtName.setText(bundle.getString("name"))
+                    dialogView.vEtName.setText(tname)
                     dialogView.vEtToken.setText(bundle.getString("token"))
                     dialogView.vBtnSubmit.setOnClickListener {
                         Toast.makeText(
                             this@MainActivity, "name:${dialogView.vEtName.text}" +
                                     ";token:${dialogView.vEtToken.text}", Toast.LENGTH_SHORT
+
                         ).show()
                         df.dismissAllowingStateLoss()
                     }

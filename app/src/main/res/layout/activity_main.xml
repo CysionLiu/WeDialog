@@ -30,6 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:textAllCaps="false"
             android:text="@string/str_loading_once"
             android:textColor="@color/blue_text"
             android:textSize="@dimen/text_size"
@@ -45,6 +46,8 @@
             android:layout_marginTop="20dp"
             android:text="@string/str_loading_random"
             android:textColor="@color/blue_text"
+            android:textAllCaps="false"
+
             android:textSize="@dimen/text_size"
             app:layout_constraintLeft_toRightOf="@id/vTvShowloading"
             app:layout_constraintRight_toRightOf="parent"
@@ -77,6 +80,8 @@
             android:text="@string/str_custom_simple"
             android:textColor="@color/blue_text"
             android:textSize="@dimen/text_size"
+            android:textAllCaps="false"
+
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/vTvShowCustom2"
             app:layout_constraintTop_toBottomOf="@id/vTvCustomTitle" />
@@ -89,6 +94,8 @@
             android:layout_marginTop="20dp"
             android:text="@string/str_custom_param"
             android:textColor="@color/blue_text"
+            android:textAllCaps="false"
+
             android:textSize="@dimen/text_size"
             app:layout_constraintLeft_toRightOf="@id/vTvShowCustom1"
             app:layout_constraintRight_toRightOf="parent"
@@ -100,6 +107,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="@string/str_custom_complex"
+            android:textAllCaps="false"
+
             android:textColor="@color/blue_text"
             android:textSize="@dimen/text_size"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -114,6 +123,8 @@
             android:text="@string/str_jump_anchor"
             android:textColor="@color/blue_text"
             android:textSize="@dimen/text_size"
+            android:textAllCaps="false"
+
             app:layout_constraintLeft_toRightOf="@id/vTvShowCustom3"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/vTvShowCustom2" />
@@ -147,6 +158,8 @@
             android:text="@string/str_custom_simple"
             android:textColor="@color/blue_text"
             android:textSize="@dimen/text_size"
+            android:textAllCaps="false"
+
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/vTvShowNormal2"
             app:layout_constraintTop_toBottomOf="@id/vTvNormalTitle" />
@@ -158,6 +171,8 @@
             android:layout_marginTop="20dp"
             android:text="@string/str_normal_normal"
             android:textColor="@color/blue_text"
+            android:textAllCaps="false"
+
             android:textSize="@dimen/text_size"
             app:layout_constraintLeft_toRightOf="@id/vTvShowNormal1"
             app:layout_constraintRight_toLeftOf="@id/vTvShowNormal3"
@@ -167,6 +182,8 @@
             android:id="@+id/vTvShowNormal3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAllCaps="false"
+
             android:layout_marginTop="20dp"
             android:text="@string/str_normal_complex"
             android:textColor="@color/blue_text"

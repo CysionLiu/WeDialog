@@ -55,6 +55,7 @@ class CustomDialog : DialogFragment() {
     private var mXOffset = 0
     private var mWindowAnim = 0
     private var mAnchor: View? = null
+    private var mSaveState: Bundle? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         getSavedData(savedInstanceState)
@@ -150,7 +151,9 @@ class CustomDialog : DialogFragment() {
 
     private fun getSavedData(savedInstanceState: Bundle?) {
         savedInstanceState?.run {
-            mListenerHolder = getSerializable(WE_KEY_EVENT_HOLDER) as ListenerHolder?
+            mListenerHolder ?: run {
+                mListenerHolder = getSerializable(WE_KEY_EVENT_HOLDER) as ListenerHolder?
+            }
             mBundle.putAll(getBundle(WE_KEY_BUNDLE))
             mLayoutId = getInt(WE_KEY_LAYOUT)
             mWindowAnim = getInt(WE_KEY_ANIM)
@@ -166,8 +169,8 @@ class CustomDialog : DialogFragment() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
+        mSaveState = outState
         outState.run {
-            putSerializable(WE_KEY_EVENT_HOLDER, mListenerHolder)
             putBundle(WE_KEY_BUNDLE, mBundle)
             putInt(WE_KEY_LAYOUT, mLayoutId)
             putInt(WE_KEY_ANIM, mWindowAnim)
@@ -179,6 +182,12 @@ class CustomDialog : DialogFragment() {
             putBoolean(WE_KEY_CANCEL, mCancelable)
             putBoolean(WE_KEY_CANCEL_OUTSIDE, mCancelableOutSide)
         }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        mSaveState?.putSerializable(WE_KEY_EVENT_HOLDER, mListenerHolder)
+
     }
 
     fun getStatusBarHeight(): Int {
