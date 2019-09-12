@@ -49,4 +49,8 @@ class LoadingDialog : DialogFragment() {
         }
     }
 
+    override fun onDetach() {
+        super.onDetach()
+        WeDialog.loadingDialog?.dismissAllowingStateLoss()
+    }
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">dialogLib</string>
+    <string name="app_name">WeDialog</string>
     <string name="str_jump_anchor">anchor</string>
     <string name="str_load_hint">Loading</string>
     <string name="str_loading_once">show</string>
@@ -21,4 +21,5 @@
     <string name="str_notice">Notice</string>
     <string name="str_confirm">Confirm</string>
     <string name="str_cancel">Cancel</string>
+    <string name="str_show_unsupport_rotate_screen">click other btns,UnSupport rotate screen</string>
 </resources>

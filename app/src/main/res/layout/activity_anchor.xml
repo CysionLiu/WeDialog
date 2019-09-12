@@ -64,7 +64,7 @@
         android:id="@+id/vBtnShowAnchor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="show"
+        android:text="@string/str_show_unsupport_rotate_screen"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

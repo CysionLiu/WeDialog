@@ -12,7 +12,7 @@ import com.cysion.wedialog.dialogs.NormalDialog
 object WeDialog {
 
     //global loading
-    private var loadingDialog: LoadingDialog? = null
+    internal var loadingDialog: LoadingDialog? = null
     //global config,can init once outside
     internal var weConfig = Config()
 

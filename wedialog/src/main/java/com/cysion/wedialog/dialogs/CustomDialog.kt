@@ -3,6 +3,7 @@ package com.cysion.wedialog.dialogs
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.provider.Settings
 import android.util.DisplayMetrics
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -77,17 +78,20 @@ class CustomDialog : DialogFragment() {
             p.height = WindowManager.LayoutParams.WRAP_CONTENT
 
             val sw = resources.displayMetrics.widthPixels
-            val realHeight = getHasVirtualKey()
+            val realHeight = getRealScreenHeight()
             val disHeight = resources.displayMetrics.heightPixels
             val sta = getStatusBarHeight()
             val nav = getNavigationBarHeight()
-            var sh = disHeight
+            var sh = realHeight
             if (realHeight.equals(disHeight + sta)) {
                 sh = realHeight
             } else if (realHeight.equals(disHeight + nav)) {
                 sh = disHeight
             } else if (realHeight.equals(disHeight + nav + sta)) {
                 sh = realHeight - nav
+            }else if(Settings.Global.getInt(getContentResolver(), "force_fsg_nav_bar", 0) == 0){
+                //虚拟键展示+realheight，displayheight没有明确关系；
+                sh = realHeight-nav
             }
             //set anchor
             mAnchor?.run {
@@ -209,7 +213,7 @@ class CustomDialog : DialogFragment() {
         return result
     }
 
-    private fun getHasVirtualKey(): Int {
+    private fun getRealScreenHeight(): Int {
         activity?.run {
             var dpi = 0
             val display = window.windowManager.getDefaultDisplay()

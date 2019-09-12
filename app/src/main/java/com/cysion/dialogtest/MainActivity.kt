@@ -92,6 +92,7 @@ class MainActivity : AppCompatActivity() {
             val s = "click me"
             WeDialog.custom(this)
                 .layout(R.layout.dialog_custom1)
+                .setWidthRatio(0.6f)
                 .setAnim(R.style.dAnimation_fade)
                 .show { df, dialogView, bundle ->
                     dialogView.vBtnCus1.text = s
