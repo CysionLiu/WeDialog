@@ -1,6 +1,9 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+
+//apply plugin: 'com.novoda.bintray-release'
+
 android {
     compileSdkVersion 28
 
@@ -23,6 +26,17 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.41"
     compileOnly 'androidx.appcompat:appcompat:1.0.2'
 }
+
+
+//publish {
+//    userOrg = 'cysion1989'//你的用户名
+//    groupId = 'com.cysion'//jcenter上的路径，比如com.demo
+//    artifactId = 'WeDialog'//结合groudId，生成依赖地址，比如com.demo:haha
+//    repoName='maven'//仓库名称，同线上创建的
+//    publishVersion = '1.0.0.x'//版本号
+//    desc = 'A library for showing dialog with custom view in Android app more simply'//描述，随便
+//    website = 'https://**'//网站，随便；
+//}
