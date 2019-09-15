@@ -57,8 +57,8 @@ class CustomDialog : DialogFragment() {
     private var mWindowAnim = 0
     private var mAnchor: View? = null
     private var mSaveState: Bundle? = null
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+
         getSavedData(savedInstanceState)
         activity?.run {
             if (isFinishing) {
@@ -89,9 +89,11 @@ class CustomDialog : DialogFragment() {
                 sh = disHeight
             } else if (realHeight.equals(disHeight + nav + sta)) {
                 sh = realHeight - nav
-            }else if(Settings.Global.getInt(getContentResolver(), "force_fsg_nav_bar", 0) == 0){
+            } else if (Settings.Global.getInt(getContentResolver(), "force_fsg_nav_bar", 0) == 0) {
                 //虚拟键展示+realheight，displayheight没有明确关系；
-                sh = realHeight-nav
+                if (realHeight > disHeight) {
+                    sh = realHeight - nav
+                }
             }
             //set anchor
             mAnchor?.run {
