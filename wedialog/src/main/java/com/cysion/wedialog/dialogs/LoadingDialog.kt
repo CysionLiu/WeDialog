@@ -5,8 +5,8 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.WindowManager
-import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.FragmentManager
+import android.support.v4.app.DialogFragment
+import android.support.v4.app.FragmentManager
 import com.cysion.wedialog.R
 import com.cysion.wedialog.WeDialog
 

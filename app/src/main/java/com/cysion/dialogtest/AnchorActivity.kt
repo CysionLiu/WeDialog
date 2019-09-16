@@ -1,7 +1,7 @@
 package com.cysion.dialogtest
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.support.v7.app.AppCompatActivity
 import com.cysion.wedialog.WeDialog
 import kotlinx.android.synthetic.main.activity_anchor.*
 

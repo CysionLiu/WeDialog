@@ -2,9 +2,9 @@ package com.cysion.dialogtest
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.cysion.wedialog.WeDialog
 import com.cysion.wedialog.WeParams
 import kotlinx.android.synthetic.main.activity_main.*

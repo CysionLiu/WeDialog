@@ -1,7 +1,7 @@
 package com.cysion.wedialog
 
+import android.support.v4.app.FragmentActivity
 import android.view.Gravity
-import androidx.fragment.app.FragmentActivity
 import com.cysion.wedialog.dialogs.CustomDialog
 import com.cysion.wedialog.dialogs.LoadingDialog
 import com.cysion.wedialog.dialogs.NormalDialog

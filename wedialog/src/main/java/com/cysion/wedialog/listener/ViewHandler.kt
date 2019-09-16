@@ -1,8 +1,8 @@
 package com.cysion.wedialog.listener
 
 import android.os.Bundle
+import android.support.v4.app.DialogFragment
 import android.view.View
-import androidx.fragment.app.DialogFragment
 import java.io.Serializable
 
 typealias OnViewHandler = (df: DialogFragment, dialogView: View, bundle: Bundle) -> Unit
