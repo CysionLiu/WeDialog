@@ -17,10 +17,10 @@
 如果使用了Androidx:
 
 ```
-implementation 'com.cysion:WeDialog:1.0.0.x'
+implementation 'com.cysion:WeDialog:1.0.1.x'
 ```
 否则：
 
 ```
-implementation 'com.cysion:WeDialog:1.0.0'
+implementation 'com.cysion:WeDialog:1.0.1'
 ```

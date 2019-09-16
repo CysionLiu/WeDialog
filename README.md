@@ -19,13 +19,13 @@ show dialog more simply.
 if you use androidx,please do like this:
 
 ```
-implementation 'com.cysion:WeDialog:1.0.0.x'
+implementation 'com.cysion:WeDialog:1.0.1.x'
 ```
 
 else ,do like this:
 
 ```
-implementation 'com.cysion:WeDialog:1.0.0'
+implementation 'com.cysion:WeDialog:1.0.1'
 ```
 
 
