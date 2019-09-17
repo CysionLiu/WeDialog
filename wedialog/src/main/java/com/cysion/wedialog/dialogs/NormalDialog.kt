@@ -74,6 +74,7 @@ class NormalDialog : DialogFragment() {
             val p = window!!.attributes
             window.decorView.setBackgroundColor(0X00000000)
             window.setBackgroundDrawable(null)
+            window.setBackgroundDrawableResource(android.R.color.transparent)
             window.setGravity(Gravity.CENTER)
             p.width = (resources.displayMetrics.widthPixels * mWidthRatio).toInt()
             p.height = WindowManager.LayoutParams.WRAP_CONTENT
