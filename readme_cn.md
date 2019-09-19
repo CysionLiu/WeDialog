@@ -120,7 +120,7 @@ WeDialog.normal(this)
 高级用法:
 
 Method  | Description  
----|---|---
+---|---
 setTitle() | 设置标题，不设置则不展示
 setTitleColor() | 设置标题颜色
 setMsg() | 设置对话框内容文本
@@ -155,7 +155,7 @@ WeDialog.custom(this)
 高级用法:
 
 Method  | Description  
----|---|---
+---|---
 layout() | 设置自定义布局的id, @LayoutRes
 setGravity() | 设置对话框的gravity
 params() | 为对话框提供额外数据

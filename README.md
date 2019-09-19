@@ -114,7 +114,7 @@ WeDialog.normal(this)
 advanced usage:
 
 Method  | Description  
----|---|---
+---|---
 setTitle() | setTitle
 setTitleColor() | setTitleColor
 setMsg() | set text for dialog content
@@ -148,7 +148,7 @@ WeDialog.custom(this)
 advanced usage:
 
 Method  | Description  
----|---|---
+---|---
 layout() | set custom view layoutId, @LayoutRes
 setGravity() | set Dialog gravity,e.g TOP,CENTER
 params() | set extra data for dialog view
