@@ -300,7 +300,7 @@ class CustomDialog : DialogFragment() {
             return this
         }
 
-        //set vertical margin ratio from -1f to 1f
+        //px
         fun setYOffset(offset: Int): Builder {
             bYOffset = offset
             return this
@@ -311,7 +311,7 @@ class CustomDialog : DialogFragment() {
             return this
         }
 
-        //setHorizontal margin ratio from -1f to 1f
+        //px
         fun setXOffset(offset: Int): Builder {
             bXOffset = offset
             return this

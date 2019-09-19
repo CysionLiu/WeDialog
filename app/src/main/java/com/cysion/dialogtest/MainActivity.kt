@@ -109,7 +109,6 @@ class MainActivity : AppCompatActivity() {
                 .setAnim(R.style.BottomDialogAnimation)
                 .layout(R.layout.dialog_custom2)
                 .setDim(0.7f)
-                .setXOffset(100)
                 .params(WeParams().addParam("token", "123"))
                 .show { df, dialogView, bundle ->
                     dialogView.vEtName.setText(tname)
