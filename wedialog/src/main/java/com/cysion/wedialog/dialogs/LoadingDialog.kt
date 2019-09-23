@@ -31,6 +31,7 @@ class LoadingDialog : DialogFragment() {
             window.attributes = p
             window.setDimAmount(WeDialog.weConfig.mDimCount)
             window.setBackgroundDrawable(null)
+            window.setBackgroundDrawableResource(android.R.color.transparent)
             dialog.setContentView(view)
             dialog.window!!.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
             dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)

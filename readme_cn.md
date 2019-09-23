@@ -24,3 +24,7 @@ implementation 'com.cysion:WeDialog:1.0.0.x'
 ```
 implementation 'com.cysion:WeDialog:1.0.0'
 ```
+Method  | Description
+---|---
+layout() | 设置自定义布局的id, @LayoutRes
+setGravity() | 设置对话框的gravity
