@@ -41,7 +41,6 @@ WeDialog.normal(this)
 ```
 WeDialog.custom(this)
          .layout(R.layout.dialog_custom0)
-         .setWidthRatio(0.3f)
          .setCancelableOutSide(true)
          .anchor(vTvLeftTop)
          .show { _,_,_ ->
