@@ -3,10 +3,10 @@ package com.cysion.wedialog.dialogs
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.WindowManager
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentManager
+import android.view.LayoutInflater
+import android.view.WindowManager
 import com.cysion.wedialog.R
 import com.cysion.wedialog.WeDialog
 
@@ -51,6 +51,6 @@ class LoadingDialog : DialogFragment() {
 
     override fun onDetach() {
         super.onDetach()
-        WeDialog.loadingDialog?.dismissAllowingStateLoss()
+        WeDialog.dismiss()
     }
 }

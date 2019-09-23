@@ -17,6 +17,7 @@ class AnchorActivity : AppCompatActivity() {
                 .setCancelableOutSide(true)
                 .anchor(vTvLeftTop)
                 .show { df, dialogView, bundle -> }
+
         }
         vTvLeftBottom.setOnClickListener {
             WeDialog.custom(this)
