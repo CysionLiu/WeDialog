@@ -2,6 +2,7 @@
 <resources>
 
     <color name="we_white">#ffffffff</color>
+    <color name="we_transparent">#00000000</color>
     <color name="we_gray">#33000000</color>
     <color name="we_loading_white">#ffffffff</color>
     <color name="we_loading_background">#aa000000</color>
