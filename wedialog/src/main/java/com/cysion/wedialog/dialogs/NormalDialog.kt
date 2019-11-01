@@ -127,6 +127,7 @@ class NormalDialog : DialogFragment() {
                 we_tv_text.setTextSize(mTextSize.toFloat())
             }
             we_btn_negative.visibility = if (mShowOneBtn) View.GONE else View.VISIBLE
+            we_normal_divider.visibility = if (mShowOneBtn) View.GONE else View.VISIBLE
             we_btn_positive.setOnClickListener {
                 mListenerHolder?.aYesHandler?.invoke(this@NormalDialog)
             }

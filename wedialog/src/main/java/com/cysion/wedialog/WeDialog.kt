@@ -73,7 +73,7 @@ object WeDialog {
         var mGravity = Gravity.CENTER
 
         //0-1f
-        var mWidthRatio = 0.9f
+        var mWidthRatio = 0.85f
 
         var mCancelable = true
 

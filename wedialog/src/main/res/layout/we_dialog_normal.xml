@@ -3,9 +3,9 @@
     android:id="@+id/parent_panel"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/we_normal_box_pad"
     android:background="@drawable/we_shape_round_dialog"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingTop="@dimen/we_normal_box_pad">
 
 
     <TextView
@@ -26,17 +26,20 @@
         android:layout_height="match_parent"
         android:layout_margin="10dp"
         android:gravity="center"
-        android:minHeight="60dp"
+        android:minHeight="70dp"
         android:paddingLeft="6dp"
         android:text="@string/we_str_text"
         android:textColor="@color/we_text_color"
         android:textSize="@dimen/we_text_size" />
 
+    <View
+        android:background="@color/we_gray"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="46dp"
-        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <Button
@@ -44,22 +47,27 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/we_shape_round_left_button"
+            android:background="@null"
             android:gravity="center"
-            android:textAllCaps="false"
             android:maxLines="1"
             android:text="@string/we_str_no_text"
+            android:textAllCaps="false"
             android:textColor="@color/we_no_color"
-            android:textSize="@dimen/we_no_size" />
-
+            android:textSize="@dimen/we_no_size"
+            android:visibility="visible" />
+        <View
+            android:id="@+id/we_normal_divider"
+            android:background="@color/we_gray"
+            android:layout_width="1px"
+            android:layout_height="match_parent"/>
 
         <Button
             android:id="@+id/we_btn_positive"
             android:layout_width="0dip"
-            android:gravity="center"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/we_shape_round_right_button"
+            android:background="@null"
+            android:gravity="center"
             android:maxLines="1"
             android:text="@string/we_str_yes_text"
             android:textAllCaps="false"
