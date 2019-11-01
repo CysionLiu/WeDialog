@@ -29,8 +29,8 @@ WeDialog.normal(this)
         .setTitle(getString(R.string.str_notice))
         .setMsg(getString(R.string.str_good_job))
         .show{
-			//ok button clicked
-		 }
+	    //ok button clicked
+	}
 ```
 
 or you can show a dialog with custom view which will anchor another view just like this.
@@ -43,9 +43,9 @@ WeDialog.custom(this)
          .layout(R.layout.dialog_custom0)
          .setCancelableOutSide(true)
          .anchor(vTvLeftTop)
-         .show { _,_,_ ->
+         .show { df,dialogview,_ ->
           //do sth when view is inflated
-		 }
+	  }
 ```
 
 
@@ -141,7 +141,7 @@ WeDialog.custom(this)
          .layout(R.layout.dialog_custom0)
          .show { _,_,_ ->
           //do sth when view is inflated
-		 }
+	 }
 ```
 
 advanced usage:
@@ -166,7 +166,7 @@ setCancelable() | set whether the dialog could be dismissed by click key
 
 ### License
 
-
+```
 Copyright 2019 CysionLiu
 
 Licensed under the Apache License, Version 2.0 (the "License");

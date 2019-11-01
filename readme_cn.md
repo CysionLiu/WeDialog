@@ -27,8 +27,8 @@ WeDialog.normal(this)
         .setTitle(getString(R.string.str_notice))
         .setMsg(getString(R.string.str_good_job))
         .show{
-			//对话框 点击确定按钮回调
-		 }
+		//对话框 点击确定按钮回调
+	 }
 ```
 ![](mat/p1.jpg)
 
@@ -43,9 +43,9 @@ WeDialog.custom(this)
          .layout(R.layout.dialog_custom0)
          .setCancelableOutSide(true)
          .anchor(vTvLeftTop)
-         .show { _,_,_ ->
+         .show { df,view,bundle ->
           //当自定义view加载成功回调
-		 }
+          }
 ```
 
 <img src="mat/g1.gif" width="39%" >
@@ -148,7 +148,7 @@ WeDialog.custom(this)
          .layout(R.layout.dialog_custom0)
          .show { _,_,_ ->
           //当自定义view加载完成时回调
-		 }
+	 }
 ```
 
 高级用法:
@@ -168,14 +168,14 @@ setCancelable() | 设置对话框是否可以取消
 
 
 
-**一些全局配置：WeDialog.initOnce(config: Config) **
+**一些全局配置：WeDialog.initOnce(config: Config)**
 
 
 
 
 ### License
 
-
+```
 Copyright 2019 CysionLiu
 
 Licensed under the Apache License, Version 2.0 (the "License");
