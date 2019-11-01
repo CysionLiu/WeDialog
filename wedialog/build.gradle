@@ -36,7 +36,7 @@ dependencies {
 //    groupId = 'com.cysion'//jcenter上的路径，比如com.demo
 //    artifactId = 'WeDialog'//结合groudId，生成依赖地址，比如com.demo:haha
 //    repoName='maven'//仓库名称，同线上创建的
-//    publishVersion = '1.0.1.x'//版本号
+//    publishVersion = '1.0.3.x'//版本号
 //    desc = 'A library for showing dialog with custom view in Android app more simply'//描述，随便
 //    website = 'https://**'//网站，随便；
 //}
