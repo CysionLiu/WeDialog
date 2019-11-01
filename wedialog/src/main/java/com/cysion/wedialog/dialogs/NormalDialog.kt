@@ -64,7 +64,7 @@ class NormalDialog : DialogFragment() {
             if (isFinishing) {
                 return super.onCreateDialog(savedInstanceState)
             }
-            val builder = AlertDialog.Builder(activity)
+            val builder = AlertDialog.Builder(activity, R.style.we_dialog_default_style)
             val inflater = LayoutInflater.from(activity)
             val view = inflater.inflate(R.layout.we_dialog_normal, null)
             initViewAndEvent(view)
@@ -127,7 +127,7 @@ class NormalDialog : DialogFragment() {
                 we_tv_text.setTextSize(mTextSize.toFloat())
             }
             we_btn_negative.visibility = if (mShowOneBtn) View.GONE else View.VISIBLE
-            we_normal_divider.visibility = if (mShowOneBtn) View.GONE else View.VISIBLE
+            we_normal_divider?.visibility = if (mShowOneBtn) View.GONE else View.VISIBLE
             we_btn_positive.setOnClickListener {
                 mListenerHolder?.aYesHandler?.invoke(this@NormalDialog)
             }

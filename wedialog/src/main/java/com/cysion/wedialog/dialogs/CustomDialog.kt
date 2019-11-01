@@ -14,6 +14,7 @@ import androidx.annotation.StyleRes
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
+import com.cysion.wedialog.R
 import com.cysion.wedialog.WeDialog
 import com.cysion.wedialog.WeParams
 import com.cysion.wedialog.listener.ListenerHolder
@@ -64,7 +65,7 @@ class CustomDialog : DialogFragment() {
             if (isFinishing) {
                 return super.onCreateDialog(savedInstanceState)
             }
-            val builder = AlertDialog.Builder(activity)
+            val builder = AlertDialog.Builder(activity, R.style.we_dialog_default_style)
             val inflater = LayoutInflater.from(activity)
             val view = inflater.inflate(mLayoutId, null)
             val dialog = builder.create()
