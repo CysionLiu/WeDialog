@@ -28,7 +28,7 @@ object WeDialog {
 
     /*
     * begin loading*/
-    fun loading(activity: FragmentActivity) {
+    fun loading(activity: FragmentActivity,msg:String = "") {
         //do nothing when loading
         loadingDialog?.run {
             dialog?.run {
@@ -40,7 +40,7 @@ object WeDialog {
         if (activity.isFinishing) {
             return
         }
-        loadingDialog = LoadingDialog()
+        loadingDialog = LoadingDialog.create(msg)
         loadingDialog?.show(activity.supportFragmentManager, "")
 
     }

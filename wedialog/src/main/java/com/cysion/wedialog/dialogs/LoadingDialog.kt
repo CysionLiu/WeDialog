@@ -5,12 +5,16 @@ import android.app.Dialog
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentManager
+import android.text.TextUtils
 import android.view.LayoutInflater
+import android.view.View
 import android.view.WindowManager
+import android.widget.TextView
 import com.cysion.wedialog.R
 import com.cysion.wedialog.WeDialog
 
 class LoadingDialog : DialogFragment() {
+    private lateinit var text: String
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         activity?.run {
@@ -20,6 +24,13 @@ class LoadingDialog : DialogFragment() {
             val builder = AlertDialog.Builder(activity, R.style.we_dialog_default_style)
             val inflater = LayoutInflater.from(activity)
             val view = inflater.inflate(R.layout.we_dialog_loading, null)
+            val tvMsg = view.findViewById<TextView>(R.id.we_tv_loading_msg)
+            if (TextUtils.isEmpty(text)) {
+                tvMsg.visibility = View.GONE
+            } else {
+                tvMsg.visibility = View.VISIBLE
+                tvMsg.text = text
+            }
             val dialog = builder.create()
             dialog.show()
             val window = dialog.window
@@ -27,7 +38,7 @@ class LoadingDialog : DialogFragment() {
             setCancelable(WeDialog.weConfig.mCancelable)
             val p = window!!.attributes
             window.decorView.setBackgroundColor(0X00000000)
-            p.width = (resources.displayMetrics.widthPixels*WeDialog.weConfig.mWidthRatio).toInt()
+            p.width = (resources.displayMetrics.widthPixels * WeDialog.weConfig.mWidthRatio).toInt()
             window.attributes = p
             window.setDimAmount(WeDialog.weConfig.mDimCount)
             window.setBackgroundDrawable(null)
@@ -53,5 +64,13 @@ class LoadingDialog : DialogFragment() {
     override fun onDetach() {
         super.onDetach()
         WeDialog.dismiss()
+    }
+
+    companion object {
+        fun create(text: String): LoadingDialog {
+            val dialog = LoadingDialog()
+            dialog.text = text;
+            return dialog
+        }
     }
 }

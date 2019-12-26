@@ -135,20 +135,18 @@ class MainActivity : AppCompatActivity() {
             WeDialog.loading(this)
         }
         vTvCloseloading.setOnClickListener {
-            for (i in 1..5) {
-                Thread {
-                    Thread.sleep((1000 * i).toLong())
+            Thread {
+                for (i in 1..5) {
+                    Thread.sleep((1000).toLong())
                     runOnUiThread {
-                        WeDialog.loading(this)
+                        WeDialog.loading(this, "i:$i")
                     }
-                }.start()
-                Thread {
-                    Thread.sleep((1500 * i).toLong())
+                    Thread.sleep((1500).toLong())
                     runOnUiThread {
                         WeDialog.dismiss()
                     }
-                }.start()
-            }
+                }
+            }.start()
         }
     }
 }
