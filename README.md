@@ -114,7 +114,7 @@ advanced usage:
 
 Method  | Description  
 ---|---
-setTitle() | setTitle
+setTitle() | setTitle,options
 setTitleColor() | setTitleColor
 setMsg() | set text for dialog content
 setMsgSize() | set textsize of dialog content
