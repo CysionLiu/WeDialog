@@ -63,13 +63,13 @@ repositories {
 if you use androidx,please do like this:
 
 ```
-implementation 'com.cysion:WeDialog:1.0.5.x'
+implementation 'com.cysion:WeDialog:1.1.0.x'
 ```
 
 else ,do like this:
 
 ```
-implementation 'com.cysion:WeDialog:1.0.6'
+implementation 'com.cysion:WeDialog:1.1.0'
 ```
 
 
@@ -82,7 +82,7 @@ There are three kinds of Dialogs in the library, the usage of them are as belows
 show loading:
 
 ```
-WeDialog.loading(this)
+WeDialog.loading(this,msg(option))
 ```
 
 dismiss loading:

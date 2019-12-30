@@ -3,23 +3,42 @@ package com.cysion.wedialog.dialogs
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
+import android.view.View
 import android.view.WindowManager
+import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.cysion.wedialog.R
 import com.cysion.wedialog.WeDialog
 
 class LoadingDialog : DialogFragment() {
+    private lateinit var text: String
 
+    private val MSG = "loading msg"
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(MSG,text)
+    }
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         activity?.run {
             if (isFinishing) {
                 return super.onCreateDialog(savedInstanceState)
             }
+            savedInstanceState?.run {
+                text=getString(MSG,"")
+            }
             val builder = AlertDialog.Builder(activity, R.style.we_dialog_default_style)
             val inflater = LayoutInflater.from(activity)
             val view = inflater.inflate(R.layout.we_dialog_loading, null)
+            val tvMsg = view.findViewById<TextView>(R.id.we_tv_loading_msg)
+            if (TextUtils.isEmpty(text)) {
+                tvMsg.visibility = View.GONE
+            } else {
+                tvMsg.visibility = View.VISIBLE
+                tvMsg.text = text
+            }
             val dialog = builder.create()
             dialog.show()
             val window = dialog.window
@@ -53,5 +72,13 @@ class LoadingDialog : DialogFragment() {
     override fun onDetach() {
         super.onDetach()
         WeDialog.dismiss()
+    }
+
+    companion object {
+        fun create(text: String): LoadingDialog {
+            val dialog = LoadingDialog()
+            dialog.text = text;
+            return dialog
+        }
     }
 }

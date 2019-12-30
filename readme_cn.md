@@ -66,12 +66,12 @@ repositories {
 如果使用了Androidx:
 
 ```
-implementation 'com.cysion:WeDialog:1.0.5.x'
+implementation 'com.cysion:WeDialog:1.1.0.x'
 ```
 否则：
 
 ```
-implementation 'com.cysion:WeDialog:1.0.6'
+implementation 'com.cysion:WeDialog:1.1.0'
 ```
 
 
@@ -85,7 +85,7 @@ implementation 'com.cysion:WeDialog:1.0.6'
 show loading:
 
 ```
-WeDialog.loading(this)
+WeDialog.loading(this,文本(可选项))
 ```
 
 dismiss loading:
@@ -94,7 +94,7 @@ dismiss loading:
 WeDialog.dismiss()
 ```
 
-**如果想要展示不同的加载框，则可以在上层module里创建+重写*we_dialog_loading.xml布局文件，需要指出的是，布局文件名字，一定是we_dialog_loading**
+**如果想要展示不同的加载框，则可以在上层module里创建+重写*we_dialog_loading.xml布局文件，需要指出的是，布局文件名字,一定是we_dialog_loading**
 
 
 ----------
