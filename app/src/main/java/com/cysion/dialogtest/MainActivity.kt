@@ -132,7 +132,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showLoading() {
         vTvShowloading.setOnClickListener {
-            WeDialog.loading(this)
+            WeDialog.loading(this,"hello dialog")
         }
         vTvCloseloading.setOnClickListener {
             Thread {

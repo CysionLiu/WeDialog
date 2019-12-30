@@ -15,11 +15,19 @@ import com.cysion.wedialog.WeDialog
 
 class LoadingDialog : DialogFragment() {
     private lateinit var text: String
+    private val MSG = "loading msg"
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(MSG,text)
+    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         activity?.run {
             if (isFinishing) {
                 return super.onCreateDialog(savedInstanceState)
+            }
+            savedInstanceState?.run {
+                text=getString(MSG,"")
             }
             val builder = AlertDialog.Builder(activity, R.style.we_dialog_default_style)
             val inflater = LayoutInflater.from(activity)
