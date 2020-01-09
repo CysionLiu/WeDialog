@@ -63,13 +63,13 @@ repositories {
 if you use androidx,please do like this:
 
 ```
-implementation 'com.cysion:WeDialog:1.1.0.x'
+implementation 'com.cysion:WeDialog:1.0.5.x'
 ```
 
 else ,do like this:
 
 ```
-implementation 'com.cysion:WeDialog:1.1.0'
+implementation 'com.cysion:WeDialog:1.0.6'
 ```
 
 
