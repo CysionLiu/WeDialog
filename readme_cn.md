@@ -66,12 +66,12 @@ repositories {
 如果使用了Androidx:
 
 ```
-implementation 'com.cysion:WeDialog:1.1.0.x'
+implementation 'com.cysion:WeDialog:1.2.0.x'
 ```
 否则：
 
 ```
-implementation 'com.cysion:WeDialog:1.1.0'
+implementation 'com.cysion:WeDialog:1.2.0'
 ```
 
 
