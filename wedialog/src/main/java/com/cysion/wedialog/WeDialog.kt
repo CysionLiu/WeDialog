@@ -28,7 +28,7 @@ object WeDialog {
 
     /*
     * begin loading*/
-    fun loading(activity: FragmentActivity,msg:String = "") {
+    fun loading(activity: FragmentActivity, msg: String = "") {
         //do nothing when loading
         loadingDialog?.run {
             dialog?.run {
@@ -48,14 +48,8 @@ object WeDialog {
     /*
     * dismiss loading dialog*/
     fun dismiss() {
-        loadingDialog?.run {
-            dialog?.run {
-                if (isShowing) {
-                    loadingDialog?.dismissAllowingStateLoss()
-                }
-            }
-            loadingDialog = null
-        }
+        loadingDialog?.dismissAllowingStateLoss()
+        loadingDialog = null
     }
 
     fun custom(activity: FragmentActivity): CustomDialog.Builder {
